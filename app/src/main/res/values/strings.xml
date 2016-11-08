@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">DadoMatematico</string>
+    <string name="btGame">New Game</string>
+    <string name="btResume">Resume</string>
+    <string name="btScore">Score</string>
+    <string name="btOptions">Options</string>
+    <string name="btExit">Exit</string>
+</resources>
