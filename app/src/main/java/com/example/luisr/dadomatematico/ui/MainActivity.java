@@ -5,8 +5,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 import com.example.luisr.dadomatematico.R;
+import com.example.luisr.dadomatematico.core.Dado;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -15,10 +17,22 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.activity_main);
 
-        Button btGame = (Button) this.findViewById( R.id.btGame );
-        Button btScore = (Button) this.findViewById( R.id.btScore );
-        Button btOptions = (Button) this.findViewById( R.id.btOptions );
-        Button btExit = (Button) this.findViewById( R.id.btExit );
+        final Button btGame = (Button) this.findViewById( R.id.btGame );
+        final Button btScore = (Button) this.findViewById( R.id.btScore );
+        final Button btOptions = (Button) this.findViewById( R.id.btOptions );
+        final Button btExit = (Button) this.findViewById( R.id.btExit );
+        final Button b = (Button) this.findViewById( R.id.button );
+        /*final EditText ed = (EditText) this.findViewById(R.id.editText);
+        final Dado dado = new Dado(6);
+
+        b.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String a = dado.lanzarDado();
+                ed.setText(a);
+            }
+        });*/
+
 //-----------------------------------BUTTON LISTENERS---------------------------------------------
         btGame.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -5,4 +5,8 @@
     <string name="btScore">Score</string>
     <string name="btOptions">Options</string>
     <string name="btExit">Exit</string>
+    <string name="textView">Introduce nombres de los jugadores</string>
+    <string name="opAñadirJugador">Añadir Jugador</string>
+    <string name="opHelp">Help</string>
+
 </resources>
