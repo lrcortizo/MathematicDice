@@ -4,8 +4,11 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -85,6 +88,38 @@ public class GameActivity extends AppCompatActivity {
         builder.setMessage( "Mensaje ayuda" );
         builder.create().show();
 
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View view, ContextMenu.ContextMenuInfo cmi){
+        super.onCreateContextMenu(menu,view,cmi);
+        if(view.getId()==R.id.idPlayerList){
+            this.getMenuInflater().inflate(R.menu.players_contextual_menu, menu);
+            menu.setHeaderTitle(R.string.app_name);
+        }
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem menuItem){
+        boolean toret = false;
+
+        int pos= ((AdapterView.AdapterContextMenuInfo) menuItem.getMenuInfo()).position;
+
+        switch(menuItem.getItemId()){
+            case R.id.context_op_elimina:
+                this.elimina(pos);
+                toret=true;
+                break;
+        }
+        return toret;
+    }
+
+    private void elimina(int pos)
+    {
+        if(pos>=0){
+            GameActivity.this.playerList.remove(pos);
+            GameActivity.this.playerListAdapter.notifyDataSetChanged();
+        }
     }
 }
 

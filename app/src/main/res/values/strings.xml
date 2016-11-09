@@ -1,12 +1,12 @@
 <resources>
     <string name="app_name">DadoMatematico</string>
     <string name="btGame">New Game</string>
-    <string name="btResume">Resume</string>
-    <string name="btScore">Score</string>
-    <string name="btOptions">Options</string>
-    <string name="btExit">Exit</string>
+    <string name="btScore">Puntuaciones</string>
+    <string name="btOptions">Opciones</string>
+    <string name="btExit">Salir</string>
     <string name="textView">Introduce nombres de los jugadores</string>
     <string name="opAñadirJugador">Añadir Jugador</string>
-    <string name="opHelp">Help</string>
+    <string name="opHelp">Ayuda</string>
+    <string name="opElimina">Eliminar</string>
 
 </resources>
