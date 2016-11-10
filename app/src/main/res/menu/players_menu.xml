@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:title="@string/opAñadirJugador"
-        android:id="@+id/opAñadirJugador" />
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:icon="@drawable/ic_user_add"
+        android:title="@string/opAñadirJugador"
+        android:id="@+id/opAñadirJugador"
+        android:orderInCategory="100"
+        android:showAsAction="always"
+        app:showAsAction="always" />
     <item android:title="@string/opHelp"
-        android:id="@+id/opHelp" />
+        android:id="@+id/opHelp"
+        android:showAsAction="ifRoom"
+        android:orderInCategory="100"/>
 </menu>

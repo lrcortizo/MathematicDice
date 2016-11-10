@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         btGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent (v.getContext(), GameActivity.class);
+                Intent intent = new Intent (v.getContext(), PlayersActivity.class);
                 startActivityForResult(intent, 0);
             }
         });
