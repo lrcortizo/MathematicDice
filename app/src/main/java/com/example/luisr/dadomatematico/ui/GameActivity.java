@@ -36,7 +36,7 @@ public class GameActivity extends AppCompatActivity {
                 this.playerList
         );
         lvPlayerList.setAdapter(this.playerListAdapter);
-
+        this.registerForContextMenu(lvPlayerList);
 
     }
     @Override
