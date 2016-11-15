@@ -1,11 +1,14 @@
 package com.example.luisr.dadomatematico.ui;
 
+
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.luisr.dadomatematico.R;
@@ -16,6 +19,18 @@ public class GameActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+
+        ImageView myAnimation = (ImageView)findViewById(R.id.image_dado);
+        final AnimationDrawable myAnimationDrawable = (AnimationDrawable)myAnimation.getDrawable();
+
+        myAnimation.post(
+                new Runnable(){
+
+                    @Override
+                    public void run() {
+                        myAnimationDrawable.start();
+                    }
+                });
 
     }
     @Override
