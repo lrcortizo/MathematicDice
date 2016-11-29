@@ -20,19 +20,6 @@
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="24dp">
-
-            <TextView
-                android:text="@string/etJugador1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/tvJugador1"
-                android:layout_weight="1" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <EditText
@@ -43,19 +30,6 @@
                 android:id="@+id/etJugador1"
                 android:layout_weight="1" />
 
-        </LinearLayout>
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="25dp">
-
-            <TextView
-                android:text="@string/etJugador2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/tvJugador2"
-                android:layout_weight="1" />
         </LinearLayout>
 
         <LinearLayout

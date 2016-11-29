@@ -46,10 +46,12 @@
             android:layout_width="match_parent"
             android:layout_height="60dp">
 
-            <TextView
+            <EditText
                 android:layout_width="wrap_content"
-                android:layout_height="39dp"
-                android:id="@+id/tvDados6"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:ems="10"
+                android:id="@+id/etDados6"
                 android:layout_weight="1" />
 
         </LinearLayout>
@@ -59,10 +61,12 @@
             android:layout_width="match_parent"
             android:layout_height="307dp">
 
-            <TextView
+            <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/tvDados12"
+                android:inputType="textPersonName"
+                android:ems="10"
+                android:id="@+id/etDados12"
                 android:layout_weight="1" />
         </LinearLayout>
 
