@@ -19,19 +19,7 @@ public class MainActivity extends AppCompatActivity {
 
         final Button btGame = (Button) this.findViewById( R.id.btGame );
         final Button btScore = (Button) this.findViewById( R.id.btScore );
-        final Button btOptions = (Button) this.findViewById( R.id.btOptions );
         final Button btExit = (Button) this.findViewById( R.id.btExit );
-        final Button b = (Button) this.findViewById( R.id.button );
-        /*final EditText ed = (EditText) this.findViewById(R.id.editText);
-        final Dado dado = new Dado(6);
-
-        b.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String a = dado.lanzarDado();
-                ed.setText(a);
-            }
-        });*/
 
 //-----------------------------------BUTTON LISTENERS---------------------------------------------
         btGame.setOnClickListener(new View.OnClickListener() {
@@ -45,13 +33,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent (v.getContext(), ScoreActivity.class);
-                startActivityForResult(intent, 0);
-            }
-        });
-        btOptions.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent (v.getContext(), OptionsActivity.class);
                 startActivityForResult(intent, 0);
             }
         });

@@ -2,13 +2,15 @@
     <string name="app_name">DadoMatematico</string>
     <string name="btGame">Jugar</string>
     <string name="btScore">Puntuaciones</string>
-    <string name="btOptions">Opciones</string>
     <string name="btExit">Salir</string>
-    <string name="textView">Introduce jugadores</string>
     <string name="opAñadirJugador">Añadir Jugador</string>
     <string name="opHelp">Ayuda</string>
     <string name="opElimina">Eliminar</string>
     <string name="btStart">Comenzar</string>
     <string name="opSalir">Salir</string>
-
+    <string name="button12">Lanzar dados 12 caras</string>
+    <string name="button6">Lanzar dados 6 caras</string>
+    <string name="btPlay">Jugar</string>
+    <string name="etJugador1">Nombre del jugador 1:</string>
+    <string name="etJugador2">Nombre del jugador 2:</string>
 </resources>

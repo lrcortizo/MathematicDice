@@ -5,11 +5,12 @@ import android.os.Bundle;
 
 import com.example.luisr.dadomatematico.R;
 
-public class OptionsActivity extends AppCompatActivity {
+public class Turno1Activity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_options);
+        setContentView(R.layout.activity_turno1);
+
     }
 }
