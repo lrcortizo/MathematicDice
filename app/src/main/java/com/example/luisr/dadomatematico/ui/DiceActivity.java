@@ -23,8 +23,8 @@ import com.example.luisr.dadomatematico.R;
 import com.example.luisr.dadomatematico.core.Dado;
 
 public class DiceActivity extends AppCompatActivity {
-    public static String[] lanzar6;
-    public static String[] lanzar12;
+    private String [] lanzar6 = new String[6];
+    private String [] lanzar12 = new String[2];
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,28 +34,27 @@ public class DiceActivity extends AppCompatActivity {
         final Button btPlay =(Button) this.findViewById(R.id.btPlay);
         final Button bt6 = (Button) this.findViewById( R.id.button6 );
         final Button bt12 = (Button) this.findViewById( R.id.button12 );
-        final EditText etDados6 = (EditText) this.findViewById(R.id.etDados6);
-        final EditText etDados12 = (EditText) this.findViewById(R.id.etDados12);
+        final TextView etDados6 = (TextView) this.findViewById(R.id.etDados6);
+        final TextView etDados12 = (TextView) this.findViewById(R.id.etDados12);
         final Dado dado6 = new Dado(6);
         final Dado dado12 = new Dado(12);
-        /*for(int i=0;i<6;i++){
+        for(int i=0;i<6;i++){
             lanzar6[i] = dado6.lanzarDado();
         }
-
         for(int i=0;i<2;i++) {
             lanzar12[i] = dado12.lanzarDado();
-        }*/
+        }
         bt6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                etDados6.setText("Reultado del lanzamiento de los dados de 6 caras:"+lanzar6[0]+", "+lanzar6[1]+", "+lanzar6[2]+", "
-                        +lanzar6[3]+", "+lanzar6[4]+", "+lanzar6[5]);
+                etDados6.setText("Reultado del lanzamiento de los dados de 6 caras: "+lanzar6[0]+", "+lanzar6[1]+", "
+                        +lanzar6[2]+", "+lanzar6[3]+", "+lanzar6[4]+", "+lanzar6[5]);
             }
         });
         bt12.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                etDados12.setText("Reultado del lanzamiento de los dados de 12 caras:"+lanzar6[0]+", "+lanzar6[1]);
+                etDados12.setText("Reultado del lanzamiento de los dados de 12 caras: "+lanzar6[0]+", "+lanzar6[1]);
             }
         });
         btPlay.setOnClickListener(new View.OnClickListener() {
