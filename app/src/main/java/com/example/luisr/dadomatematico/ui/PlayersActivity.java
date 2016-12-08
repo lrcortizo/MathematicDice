@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.ContextMenu;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -29,16 +30,22 @@ public class PlayersActivity extends AppCompatActivity {
 
         final EditText etJugador1 = (EditText) this.findViewById(R.id.etJugador1);
         final EditText etJugador2 = (EditText) this.findViewById(R.id.etJugador2);
-
         final Button btStart = (Button) this.findViewById( R.id.btStart );
 
         btStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent (v.getContext(), DiceActivity.class);
-                intent.putExtra("nombre1", etJugador1.getText().toString());
-                intent.putExtra("nombre2", etJugador2.getText().toString());
-                startActivityForResult(intent, 0);
+                if (!etJugador1.getText().toString().isEmpty() && !etJugador2.getText().toString().isEmpty()) {
+                    Intent intent = new Intent(v.getContext(), DiceActivity.class);
+                    intent.putExtra("nombre1", etJugador1.getText().toString());
+                    intent.putExtra("nombre2", etJugador2.getText().toString());
+                    startActivityForResult(intent, 0);
+                }else{
+                    AlertDialog.Builder builder = new AlertDialog.Builder( PlayersActivity.this );
+                    builder.setTitle( "Error" );
+                    builder.setMessage( "Escribe los nombres de los jugadores antes de continuar" );
+                    builder.create().show();
+                }
             }
         });
 
@@ -71,7 +78,7 @@ public class PlayersActivity extends AppCompatActivity {
         final TextView t = new TextView(this);
         AlertDialog.Builder builder = new AlertDialog.Builder( this );
         builder.setTitle("Help");
-        builder.setMessage( "Mensaje ayuda" );
+        builder.setMessage( "Escribe el nombre de los jugadores y pulsa comenzar" );
         builder.create().show();
 
     }

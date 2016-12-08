@@ -11,6 +11,8 @@
     <string name="button12">Lanzar dados 12 caras</string>
     <string name="button6">Lanzar dados 6 caras</string>
     <string name="btPlay">Jugar</string>
-    <string name="etJugador1">Nombre del jugador 1:</string>
-    <string name="etJugador2">Nombre del jugador 2:</string>
+    <string name="tvJugador1">Nombre del jugador 1:</string>
+    <string name="tvJugador2">Nombre del jugador 2:</string>
+    <string name="tvExpresion">Escribe el resultado: </string>
+    <string name="btTurno">Pasar turno</string>
 </resources>
