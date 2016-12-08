@@ -115,7 +115,7 @@ public class DiceActivity extends AppCompatActivity {
         final TextView t = new TextView(this);
         AlertDialog.Builder builder = new AlertDialog.Builder( this );
         builder.setTitle("Help");
-        builder.setMessage( "Mensaje ayuda" );
+        builder.setMessage( "Pulsa los botones para lanzar los dados" );
         builder.create().show();
 
     }

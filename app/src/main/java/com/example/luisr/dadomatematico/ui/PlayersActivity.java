@@ -35,11 +35,17 @@ public class PlayersActivity extends AppCompatActivity {
         btStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!etJugador1.getText().toString().isEmpty() && !etJugador2.getText().toString().isEmpty()) {
+                if (!etJugador1.getText().toString().isEmpty() && !etJugador2.getText().toString().isEmpty()
+                        && !(etJugador1.getText().toString().equals(etJugador2.getText().toString()))) {
                     Intent intent = new Intent(v.getContext(), DiceActivity.class);
                     intent.putExtra("nombre1", etJugador1.getText().toString());
                     intent.putExtra("nombre2", etJugador2.getText().toString());
                     startActivityForResult(intent, 0);
+                }else if(etJugador1.getText().toString().equals(etJugador2.getText().toString())){
+                    AlertDialog.Builder builder = new AlertDialog.Builder( PlayersActivity.this );
+                    builder.setTitle( "Error" );
+                    builder.setMessage( "Nombres de jugadores iguales" );
+                    builder.create().show();
                 }else{
                     AlertDialog.Builder builder = new AlertDialog.Builder( PlayersActivity.this );
                     builder.setTitle( "Error" );
