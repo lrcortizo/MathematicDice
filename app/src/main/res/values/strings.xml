@@ -15,4 +15,6 @@
     <string name="tvJugador2">Nombre del jugador 2:</string>
     <string name="tvExpresion">Escribe el resultado: </string>
     <string name="btTurno">Pasar turno</string>
+    <string name="btFin">Terminar</string>
+
 </resources>

@@ -12,23 +12,24 @@ import com.example.luisr.dadomatematico.R;
 
 import org.mozilla.javascript.*;
 
-public class Turno1Activity extends AppCompatActivity {
+public class Turno2Activity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_turno1);
+        setContentView(R.layout.activity_turno2);
         final String nombre1 = getIntent().getExtras().getString("nombre1");
         final String nombre2 = getIntent().getExtras().getString("nombre2");
         final String [] dados6 = getIntent().getExtras().getStringArray("dados6");
         final int objetivo = getIntent().getExtras().getInt("objetivo");
+        final int resultado1 = getIntent().getExtras().getInt("resultado");
         final TextView tvObjetivo = (TextView) this.findViewById(R.id.tvObjetivo);
         final TextView tvCifras = (TextView) this.findViewById(R.id.tvCifras);
         tvObjetivo.setText("El objetivo es:"+objetivo);
         tvCifras.setText("Los numeros a utilizar son: "+dados6[0]+", "+dados6[1]+", "+dados6[2]+", "
                 +dados6[3]+", "+dados6[4]+", "+dados6[5]);
         final EditText etExpresion = (EditText) this.findViewById(R.id.etExpresion);
-        final Button btTurno = (Button) this.findViewById(R.id.btTurno);
+        final Button btFin = (Button) this.findViewById(R.id.btFin);
         final TextView tvTemporizador = (TextView) this.findViewById(R.id.tvTemporizador);
 
         new CountDownTimer(60000, 1000) {
@@ -42,15 +43,13 @@ public class Turno1Activity extends AppCompatActivity {
             }
         }.start();
 
-        btTurno.setOnClickListener(new View.OnClickListener() {
+        btFin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!etExpresion.getText().toString().isEmpty()){
-                    String resultado = calc(etExpresion.getText().toString());
-                }
             }
         });
     }
+
     public static String calc(String expresion){
         //ScriptEngineManager engineManager = new ScriptEngineManager();
         //ScriptEngine engine = engineManager.getEngineByName("js");

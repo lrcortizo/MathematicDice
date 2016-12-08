@@ -22,7 +22,6 @@
             android:layout_height="24dp">
 
             <TextView
-                android:text="TextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/tvTemporizador"
@@ -86,10 +85,10 @@
             android:layout_height="match_parent">
 
             <Button
-                android:text="@string/btTurno"
+                android:text="@string/btFin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/btTurno"
+                android:id="@+id/btFin"
                 android:layout_weight="1" />
         </LinearLayout>
     </LinearLayout>

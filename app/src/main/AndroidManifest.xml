@@ -18,7 +18,8 @@
         <activity android:name=".ui.ScoreActivity" />
         <activity android:name=".ui.PlayersActivity" />
         <activity android:name=".ui.DiceActivity" />
-        <activity android:name=".ui.Turno1Activity"></activity>
+        <activity android:name=".ui.Turno1Activity" />
+        <activity android:name=".ui.Turno2Activity"></activity>
     </application>
 
 </manifest>
