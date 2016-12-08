@@ -1,5 +1,6 @@
 package com.example.luisr.dadomatematico.ui;
 
+import android.app.AlertDialog;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -45,12 +46,41 @@ public class Turno1Activity extends AppCompatActivity {
         btTurno.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!etExpresion.getText().toString().isEmpty()){
-                    String resultado = calc(etExpresion.getText().toString());
+                boolean label = true;
+                for(int i=1;i<etExpresion.getText().toString().length();i++){
+                    if (!(etExpresion.getText().toString().substring((i-1),i).equals("+")) &&
+                        !(etExpresion.getText().toString().substring((i-1),i).equals("*")) &&
+                        !(etExpresion.getText().toString().substring((i-1),i).equals("-")) &&
+                        !(etExpresion.getText().toString().substring((i-1),i).equals("/")) &&
+                        !(etExpresion.getText().toString().substring((i-1),i).equals("(")) &&
+                        !(etExpresion.getText().toString().substring((i-1),i).equals(")")) &&
+                        !(etExpresion.getText().toString().substring((i-1),i).equals(dados6[0])) &&
+                        !(etExpresion.getText().toString().substring((i-1),i).equals(dados6[1])) &&
+                        !(etExpresion.getText().toString().substring((i-1),i).equals(dados6[2])) &&
+                        !(etExpresion.getText().toString().substring((i-1),i).equals(dados6[3])) &&
+                        !(etExpresion.getText().toString().substring((i-1),i).equals(dados6[4])) &&
+                        !(etExpresion.getText().toString().substring((i-1),i).equals(dados6[5])))
+                        {
+                            label=false;
+                    }
+                }
+                if(etExpresion.getText().toString().isEmpty()){
+                    AlertDialog.Builder builder = new AlertDialog.Builder( Turno1Activity.this );
+                    builder.setTitle( "Error" );
+                    builder.setMessage( "Introduce un resultado" );
+                    builder.create().show();
+                }else if(!label || etExpresion.getText().toString().length()==1){
+                    AlertDialog.Builder builder = new AlertDialog.Builder( Turno1Activity.this );
+                    builder.setTitle( "Error" );
+                    builder.setMessage( "Formato incorrecto" );
+                    builder.create().show();
                 }
             }
+
         });
     }
+    //String resultado = calc(etExpresion.getText().toString());
+
     public static String calc(String expresion){
         //ScriptEngineManager engineManager = new ScriptEngineManager();
         //ScriptEngine engine = engineManager.getEngineByName("js");
