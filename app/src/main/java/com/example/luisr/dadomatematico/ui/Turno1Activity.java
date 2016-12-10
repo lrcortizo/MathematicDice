@@ -50,7 +50,8 @@ public class Turno1Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 boolean label = true;
-                for(int i=1;i<etExpresion.getText().toString().length();i++){
+                String resultado = "";
+                for(int i=1;i<etExpresion.getText().toString().length()+1;i++){
                     if (!(etExpresion.getText().toString().substring((i-1),i).equals("+")) &&
                         !(etExpresion.getText().toString().substring((i-1),i).equals("*")) &&
                         !(etExpresion.getText().toString().substring((i-1),i).equals("-")) &&
@@ -78,7 +79,14 @@ public class Turno1Activity extends AppCompatActivity {
                     builder.setMessage( "Formato incorrecto" );
                     builder.create().show();
                 }else{
-                    String resultado = calc(etExpresion.getText().toString());
+                    try {
+                        resultado = calc(etExpresion.getText().toString());
+                    }catch (Exception e){
+                        AlertDialog.Builder builder = new AlertDialog.Builder( Turno1Activity.this );
+                        builder.setTitle( "Error" );
+                        builder.setMessage( "Formato incorrecto" );
+                        builder.create().show();
+                    }
                     Intent intent = new Intent(v.getContext(), Turno2Activity.class);
                     intent.putExtra("dados6", dados6);
                     intent.putExtra("objetivo", objetivo);

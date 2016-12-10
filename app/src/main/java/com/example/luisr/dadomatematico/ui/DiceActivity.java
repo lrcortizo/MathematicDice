@@ -60,7 +60,7 @@ public class DiceActivity extends AppCompatActivity {
         bt12.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                tvDados12.setText("Reultado del lanzamiento de los dados de 12 caras: "+lanzar6[0]+", "+lanzar6[1]);
+                tvDados12.setText("Reultado del lanzamiento de los dados de 12 caras: "+lanzar12[0]+", "+lanzar12[1]);
                 tvDice.setText("La cifra objetivo es: "+(Integer.parseInt(lanzar12[0])*Integer.parseInt(lanzar12[1])));
                 label12=true;
             }
