@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.luisr.dadomatematico.R;
+import com.example.luisr.dadomatematico.core.Partida;
 
 import org.mozilla.javascript.*;
 
@@ -22,15 +23,13 @@ public class Turno1Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_turno1);
-        final String nombre1 = getIntent().getExtras().getString("nombre1");
-        final String nombre2 = getIntent().getExtras().getString("nombre2");
-        final String [] dados6 = getIntent().getExtras().getStringArray("dados6");
-        final int objetivo = getIntent().getExtras().getInt("objetivo");
+        final Partida partida = (Partida)getIntent().getExtras().getSerializable("partida");
         final TextView tvObjetivo = (TextView) this.findViewById(R.id.tvObjetivo);
         final TextView tvCifras = (TextView) this.findViewById(R.id.tvCifras);
-        tvObjetivo.setText("El objetivo es:"+objetivo);
-        tvCifras.setText("Los numeros a utilizar son: "+dados6[0]+", "+dados6[1]+", "+dados6[2]+", "
-                +dados6[3]+", "+dados6[4]+", "+dados6[5]);
+        tvObjetivo.setText("El objetivo es:"+partida.getObjetivo());
+        tvCifras.setText("Los numeros a utilizar son: "+partida.getDado6().getTirada()[0]+", "+partida.getDado6().getTirada()[1]+", "
+                +partida.getDado6().getTirada()[2]+", "+partida.getDado6().getTirada()[3]+", "
+                +partida.getDado6().getTirada()[4]+", "+partida.getDado6().getTirada()[5]);
         final EditText etExpresion = (EditText) this.findViewById(R.id.etExpresion);
         final Button btTurno = (Button) this.findViewById(R.id.btTurno);
         final TextView tvTemporizador = (TextView) this.findViewById(R.id.tvTemporizador);
@@ -58,12 +57,12 @@ public class Turno1Activity extends AppCompatActivity {
                         !(etExpresion.getText().toString().substring((i-1),i).equals("/")) &&
                         !(etExpresion.getText().toString().substring((i-1),i).equals("(")) &&
                         !(etExpresion.getText().toString().substring((i-1),i).equals(")")) &&
-                        !(etExpresion.getText().toString().substring((i-1),i).equals(dados6[0])) &&
-                        !(etExpresion.getText().toString().substring((i-1),i).equals(dados6[1])) &&
-                        !(etExpresion.getText().toString().substring((i-1),i).equals(dados6[2])) &&
-                        !(etExpresion.getText().toString().substring((i-1),i).equals(dados6[3])) &&
-                        !(etExpresion.getText().toString().substring((i-1),i).equals(dados6[4])) &&
-                        !(etExpresion.getText().toString().substring((i-1),i).equals(dados6[5])))
+                        !(etExpresion.getText().toString().substring((i-1),i).equals(partida.getDado6().getTirada()[0])) &&
+                        !(etExpresion.getText().toString().substring((i-1),i).equals(partida.getDado6().getTirada()[1])) &&
+                        !(etExpresion.getText().toString().substring((i-1),i).equals(partida.getDado6().getTirada()[2])) &&
+                        !(etExpresion.getText().toString().substring((i-1),i).equals(partida.getDado6().getTirada()[3])) &&
+                        !(etExpresion.getText().toString().substring((i-1),i).equals(partida.getDado6().getTirada()[4])) &&
+                        !(etExpresion.getText().toString().substring((i-1),i).equals(partida.getDado6().getTirada()[5])))
                         {
                             label=false;
                     }
@@ -87,13 +86,12 @@ public class Turno1Activity extends AppCompatActivity {
                         builder.setMessage( "Formato incorrecto" );
                         builder.create().show();
                     }
-                    Intent intent = new Intent(v.getContext(), Turno2Activity.class);
-                    intent.putExtra("dados6", dados6);
-                    intent.putExtra("objetivo", objetivo);
-                    intent.putExtra("nombre1", nombre1);
-                    intent.putExtra("nombre2", nombre2);
-                    intent.putExtra("resultado", resultado);
-                    startActivityForResult(intent, 0);
+                    if(!resultado.equals("")) {
+                        partida.setResultado1(resultado);
+                        Intent intent = new Intent(v.getContext(), Turno2Activity.class);
+                        intent.putExtra("partida", partida);
+                        startActivityForResult(intent, 0);
+                    }
                 }
             }
 
@@ -101,33 +99,14 @@ public class Turno1Activity extends AppCompatActivity {
     }
 
     public static String calc(String expresion){
-        //ScriptEngineManager engineManager = new ScriptEngineManager();
-        //ScriptEngine engine = engineManager.getEngineByName("js");
-        //Interpreter interpreter = new Interpreter();
-       /* String[] varArray = new String[mapaVariables.size()];
-        int count = 0;
-
-        for (String key: mapaVariables.keySet()) {
-            varArray[count] = key + " = " + mapaVariables.get(key);
-            count++;
-        }*/
 
         Object[] params = new Object[] { "javaScriptParam" };
 
-        // Every Rhino VM begins with the enter()
-        // This Context is not Android's Context
         Context rhino = Context.enter();
 
-        // Turn off optimization to make Rhino Android compatible
         rhino.setOptimizationLevel(-1);
         try {
             Scriptable scope = rhino.initStandardObjects();
-
-            // Note the forth argument is 1, which means the JavaScript source has
-            // been compressed to only one line using something like YUI
-           /* for (String s : varArray) {
-                rhino.evaluateString(scope, s, "JavaScript", 1, null).toString();
-            }*/
 
             String expr = expresion.replaceAll("NOT", "!");
             expr = expr.replaceAll("OR", "|");
@@ -138,7 +117,6 @@ public class Turno1Activity extends AppCompatActivity {
             toRet = toRet.replaceAll("false","0");
 
             return toRet;
-
 
         } finally {
             Context.exit();

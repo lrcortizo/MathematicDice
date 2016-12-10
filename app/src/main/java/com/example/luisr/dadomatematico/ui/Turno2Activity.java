@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.luisr.dadomatematico.R;
+import com.example.luisr.dadomatematico.core.Partida;
 
 import org.mozilla.javascript.*;
 
@@ -22,16 +23,13 @@ public class Turno2Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_turno2);
-        final String nombre1 = getIntent().getExtras().getString("nombre1");
-        final String nombre2 = getIntent().getExtras().getString("nombre2");
-        final String [] dados6 = getIntent().getExtras().getStringArray("dados6");
-        final int objetivo = getIntent().getExtras().getInt("objetivo");
-        final int resultado1 = getIntent().getExtras().getInt("resultado");
+        final Partida partida = (Partida)getIntent().getExtras().getSerializable("partida");
         final TextView tvObjetivo = (TextView) this.findViewById(R.id.tvObjetivo);
         final TextView tvCifras = (TextView) this.findViewById(R.id.tvCifras);
-        tvObjetivo.setText("El objetivo es:"+objetivo);
-        tvCifras.setText("Los numeros a utilizar son: "+dados6[0]+", "+dados6[1]+", "+dados6[2]+", "
-                +dados6[3]+", "+dados6[4]+", "+dados6[5]);
+        tvObjetivo.setText("El objetivo es:"+partida.getObjetivo());
+        tvCifras.setText("Los numeros a utilizar son: "+partida.getDado6().getTirada()[0]+", "+partida.getDado6().getTirada()[1]+", "
+                +partida.getDado6().getTirada()[2]+", "+partida.getDado6().getTirada()[3]+", "
+                +partida.getDado6().getTirada()[4]+", "+partida.getDado6().getTirada()[5]);
         final EditText etExpresion = (EditText) this.findViewById(R.id.etExpresion);
         final Button btFin = (Button) this.findViewById(R.id.btFin);
         final TextView tvTemporizador = (TextView) this.findViewById(R.id.tvTemporizador);
@@ -50,38 +48,64 @@ public class Turno2Activity extends AppCompatActivity {
         btFin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                boolean label = true;
+                String resultado2 = "";
+                for(int i=1;i<etExpresion.getText().toString().length()+1;i++){
+                    if (!(etExpresion.getText().toString().substring((i-1),i).equals("+")) &&
+                            !(etExpresion.getText().toString().substring((i-1),i).equals("*")) &&
+                            !(etExpresion.getText().toString().substring((i-1),i).equals("-")) &&
+                            !(etExpresion.getText().toString().substring((i-1),i).equals("/")) &&
+                            !(etExpresion.getText().toString().substring((i-1),i).equals("(")) &&
+                            !(etExpresion.getText().toString().substring((i-1),i).equals(")")) &&
+                            !(etExpresion.getText().toString().substring((i-1),i).equals(partida.getDado6().getTirada()[0])) &&
+                            !(etExpresion.getText().toString().substring((i-1),i).equals(partida.getDado6().getTirada()[1])) &&
+                            !(etExpresion.getText().toString().substring((i-1),i).equals(partida.getDado6().getTirada()[2])) &&
+                            !(etExpresion.getText().toString().substring((i-1),i).equals(partida.getDado6().getTirada()[3])) &&
+                            !(etExpresion.getText().toString().substring((i-1),i).equals(partida.getDado6().getTirada()[4])) &&
+                            !(etExpresion.getText().toString().substring((i-1),i).equals(partida.getDado6().getTirada()[5])))
+                    {
+                        label=false;
+                    }
+                }
+                if(etExpresion.getText().toString().isEmpty()){
+                    AlertDialog.Builder builder = new AlertDialog.Builder( Turno2Activity.this );
+                    builder.setTitle( "Error" );
+                    builder.setMessage( "Introduce un resultado" );
+                    builder.create().show();
+                }else if(!label || etExpresion.getText().toString().length()==1){
+                    AlertDialog.Builder builder = new AlertDialog.Builder( Turno2Activity.this );
+                    builder.setTitle( "Error" );
+                    builder.setMessage( "Formato incorrecto" );
+                    builder.create().show();
+                }else{
+                    try {
+                        resultado2 = calc(etExpresion.getText().toString());
+                    }catch (Exception e){
+                        AlertDialog.Builder builder = new AlertDialog.Builder( Turno2Activity.this );
+                        builder.setTitle( "Error" );
+                        builder.setMessage( "Formato incorrecto" );
+                        builder.create().show();
+                    }
+                    if(!resultado2.equals("")) {
+                        partida.setResultado2(resultado2);
+                        Intent intent = new Intent(v.getContext(), FinalActivity.class);
+                        intent.putExtra("partida", partida);
+                        startActivityForResult(intent, 0);
+                    }
+                }
             }
         });
     }
 
     public static String calc(String expresion){
-        //ScriptEngineManager engineManager = new ScriptEngineManager();
-        //ScriptEngine engine = engineManager.getEngineByName("js");
-        //Interpreter interpreter = new Interpreter();
-       /* String[] varArray = new String[mapaVariables.size()];
-        int count = 0;
-
-        for (String key: mapaVariables.keySet()) {
-            varArray[count] = key + " = " + mapaVariables.get(key);
-            count++;
-        }*/
 
         Object[] params = new Object[] { "javaScriptParam" };
 
-        // Every Rhino VM begins with the enter()
-        // This Context is not Android's Context
         Context rhino = Context.enter();
 
-        // Turn off optimization to make Rhino Android compatible
         rhino.setOptimizationLevel(-1);
         try {
             Scriptable scope = rhino.initStandardObjects();
-
-            // Note the forth argument is 1, which means the JavaScript source has
-            // been compressed to only one line using something like YUI
-           /* for (String s : varArray) {
-                rhino.evaluateString(scope, s, "JavaScript", 1, null).toString();
-            }*/
 
             String expr = expresion.replaceAll("NOT", "!");
             expr = expr.replaceAll("OR", "|");
@@ -93,11 +117,9 @@ public class Turno2Activity extends AppCompatActivity {
 
             return toRet;
 
-
         } finally {
             Context.exit();
         }
-
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu){

@@ -23,18 +23,16 @@ import java.lang.*;
 
 import com.example.luisr.dadomatematico.R;
 import com.example.luisr.dadomatematico.core.Dado;
+import com.example.luisr.dadomatematico.core.Partida;
 
 public class DiceActivity extends AppCompatActivity {
-    private String [] lanzar6 = new String[6];
-    private String [] lanzar12 = new String[2];
     private boolean label6 = false;
     private boolean label12 = false;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dice);
-        final String nombre1 = (String)getIntent().getExtras().getString("nombre1");
-        final String nombre2 = (String)getIntent().getExtras().getString("nombre2");
+        final Partida partida = (Partida)getIntent().getExtras().getSerializable("partida");
         final Button btPlay =(Button) this.findViewById(R.id.btPlay);
         final Button bt6 = (Button) this.findViewById( R.id.button6 );
         final Button bt12 = (Button) this.findViewById( R.id.button12 );
@@ -43,25 +41,21 @@ public class DiceActivity extends AppCompatActivity {
         final TextView tvDice = (TextView) this.findViewById(R.id.tvDice);
         final Dado dado6 = new Dado(6);
         final Dado dado12 = new Dado(12);
-        for(int i=0;i<6;i++){
-            lanzar6[i] = dado6.lanzarDado();
-        }
-        for(int i=0;i<2;i++) {
-            lanzar12[i] = dado12.lanzarDado();
-        }
+        dado6.lanzarDado();
+        dado12.lanzarDado();
         bt6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                tvDados6.setText("Reultado del lanzamiento de los dados de 6 caras: "+lanzar6[0]+", "+lanzar6[1]+", "
-                        +lanzar6[2]+", "+lanzar6[3]+", "+lanzar6[4]+", "+lanzar6[5]);
+                tvDados6.setText("Reultado del lanzamiento de los dados de 6 caras: "+dado6.getTirada()[0]+", "+dado6.getTirada()[1]+", "
+                        +dado6.getTirada()[2]+", "+dado6.getTirada()[3]+", "+dado6.getTirada()[4]+", "+dado6.getTirada()[5]);
                 label6=true;
             }
         });
         bt12.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                tvDados12.setText("Reultado del lanzamiento de los dados de 12 caras: "+lanzar12[0]+", "+lanzar12[1]);
-                tvDice.setText("La cifra objetivo es: "+(Integer.parseInt(lanzar12[0])*Integer.parseInt(lanzar12[1])));
+                tvDados12.setText("Reultado del lanzamiento de los dados de 12 caras: "+dado12.getTirada()[0]+", "+dado12.getTirada()[1]);
+                tvDice.setText("La cifra objetivo es: "+(Integer.parseInt(dado12.getTirada()[0])*Integer.parseInt(dado12.getTirada()[1])));
                 label12=true;
             }
         });
@@ -69,11 +63,9 @@ public class DiceActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(label6 && label12) {
+                    partida.setDados(dado6, Integer.parseInt(dado12.getTirada()[0])*Integer.parseInt(dado12.getTirada()[1]));
                     Intent intent = new Intent(v.getContext(), Turno1Activity.class);
-                    intent.putExtra("dados6", lanzar6);
-                    intent.putExtra("objetivo", Integer.parseInt(lanzar12[0])*Integer.parseInt(lanzar12[1]));
-                    intent.putExtra("nombre1", nombre1);
-                    intent.putExtra("nombre2", nombre2);
+                    intent.putExtra("partida", partida);
                     startActivityForResult(intent, 0);
                 }else{
                     AlertDialog.Builder builder = new AlertDialog.Builder( DiceActivity.this );

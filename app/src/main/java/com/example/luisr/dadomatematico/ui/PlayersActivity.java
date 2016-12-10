@@ -18,11 +18,12 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.luisr.dadomatematico.R;
+import com.example.luisr.dadomatematico.core.Partida;
 
 import java.util.ArrayList;
 
 public class PlayersActivity extends AppCompatActivity {
-
+    private Partida partida;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,17 +36,17 @@ public class PlayersActivity extends AppCompatActivity {
         btStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!etJugador1.getText().toString().isEmpty() && !etJugador2.getText().toString().isEmpty()
-                        && !(etJugador1.getText().toString().equals(etJugador2.getText().toString()))) {
-                    Intent intent = new Intent(v.getContext(), DiceActivity.class);
-                    intent.putExtra("nombre1", etJugador1.getText().toString());
-                    intent.putExtra("nombre2", etJugador2.getText().toString());
-                    startActivityForResult(intent, 0);
-                }else if(etJugador1.getText().toString().equals(etJugador2.getText().toString())){
+                if(etJugador1.getText().toString().equals(etJugador2.getText().toString())){
                     AlertDialog.Builder builder = new AlertDialog.Builder( PlayersActivity.this );
                     builder.setTitle( "Error" );
                     builder.setMessage( "Nombres de jugadores iguales" );
                     builder.create().show();
+                } else if (!etJugador1.getText().toString().isEmpty() && !etJugador2.getText().toString().isEmpty()
+                                && !(etJugador1.getText().toString().equals(etJugador2.getText().toString()))) {
+                    partida = new Partida(etJugador1.getText().toString(), etJugador2.getText().toString());
+                    Intent intent = new Intent(v.getContext(), DiceActivity.class);
+                    intent.putExtra("partida", partida);
+                    startActivityForResult(intent, 0);
                 }else{
                     AlertDialog.Builder builder = new AlertDialog.Builder( PlayersActivity.this );
                     builder.setTitle( "Error" );
