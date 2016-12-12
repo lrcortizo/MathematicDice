@@ -31,7 +31,7 @@ public class Turno2Activity extends AppCompatActivity {
                 +partida.getDado6().getTirada()[2]+", "+partida.getDado6().getTirada()[3]+", "
                 +partida.getDado6().getTirada()[4]+", "+partida.getDado6().getTirada()[5]);
         final EditText etExpresion = (EditText) this.findViewById(R.id.etExpresion);
-        final Button btFin = (Button) this.findViewById(R.id.btFin);
+        final Button btTerminar = (Button) this.findViewById(R.id.btTerminar);
         final TextView tvTemporizador = (TextView) this.findViewById(R.id.tvTemporizador);
 
         new CountDownTimer(60000, 1000) {
@@ -45,7 +45,7 @@ public class Turno2Activity extends AppCompatActivity {
             }
         }.start();
 
-        btFin.setOnClickListener(new View.OnClickListener() {
+        btTerminar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 boolean label = true;

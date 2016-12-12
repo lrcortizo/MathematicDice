@@ -85,10 +85,10 @@
             android:layout_height="match_parent">
 
             <Button
-                android:text="@string/btFin"
+                android:text="@string/btTerminar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/btFin"
+                android:id="@+id/btTerminar"
                 android:layout_weight="1" />
         </LinearLayout>
     </LinearLayout>
