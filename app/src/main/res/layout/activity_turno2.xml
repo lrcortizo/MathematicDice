@@ -24,7 +24,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/tvTemporizador"
+                android:id="@+id/tvTemporizador2"
                 android:layout_weight="1" />
         </LinearLayout>
 
@@ -36,7 +36,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="27dp"
-                android:id="@+id/tvObjetivo"
+                android:id="@+id/tvObjetivo2"
                 android:layout_weight="1" />
         </LinearLayout>
 
@@ -48,7 +48,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
-                android:id="@+id/tvCifras"
+                android:id="@+id/tvCifras2"
                 android:layout_weight="1" />
         </LinearLayout>
 
@@ -60,7 +60,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/tvExpresion"
+                android:id="@+id/tvExpresion2"
                 android:layout_weight="1"
                 android:text="@string/tvExpresion" />
         </LinearLayout>
@@ -75,7 +75,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="textPersonName"
                 android:ems="10"
-                android:id="@+id/etExpresion"
+                android:id="@+id/etExpresion2"
                 android:layout_weight="1" />
         </LinearLayout>
 

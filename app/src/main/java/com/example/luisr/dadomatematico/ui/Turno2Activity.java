@@ -24,15 +24,15 @@ public class Turno2Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_turno2);
         final Partida partida = (Partida)getIntent().getExtras().getSerializable("partida");
-        final TextView tvObjetivo = (TextView) this.findViewById(R.id.tvObjetivo);
-        final TextView tvCifras = (TextView) this.findViewById(R.id.tvCifras);
+        final TextView tvObjetivo = (TextView) this.findViewById(R.id.tvObjetivo2);
+        final TextView tvCifras = (TextView) this.findViewById(R.id.tvCifras2);
         tvObjetivo.setText("El objetivo es:"+partida.getObjetivo());
         tvCifras.setText("Los numeros a utilizar son: "+partida.getDado6().getTirada()[0]+", "+partida.getDado6().getTirada()[1]+", "
                 +partida.getDado6().getTirada()[2]+", "+partida.getDado6().getTirada()[3]+", "
                 +partida.getDado6().getTirada()[4]+", "+partida.getDado6().getTirada()[5]);
-        final EditText etExpresion = (EditText) this.findViewById(R.id.etExpresion);
+        final EditText etExpresion = (EditText) this.findViewById(R.id.etExpresion2);
         final Button btTerminar = (Button) this.findViewById(R.id.btTerminar);
-        final TextView tvTemporizador = (TextView) this.findViewById(R.id.tvTemporizador);
+        final TextView tvTemporizador = (TextView) this.findViewById(R.id.tvTemporizador2);
 
         new CountDownTimer(60000, 1000) {
 
@@ -151,6 +151,5 @@ public class Turno2Activity extends AppCompatActivity {
         builder.setTitle("Help");
         builder.setMessage( "Escribe una expresion matematica para llegar al objetivo" );
         builder.create().show();
-
     }
 }

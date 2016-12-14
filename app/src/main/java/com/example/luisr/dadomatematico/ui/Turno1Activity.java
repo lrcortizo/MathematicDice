@@ -24,15 +24,15 @@ public class Turno1Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_turno1);
         final Partida partida = (Partida)getIntent().getExtras().getSerializable("partida");
-        final TextView tvObjetivo = (TextView) this.findViewById(R.id.tvObjetivo);
-        final TextView tvCifras = (TextView) this.findViewById(R.id.tvCifras);
+        final TextView tvObjetivo = (TextView) this.findViewById(R.id.tvObjetivo1);
+        final TextView tvCifras = (TextView) this.findViewById(R.id.tvCifras1);
         tvObjetivo.setText("El objetivo es:"+partida.getObjetivo());
         tvCifras.setText("Los numeros a utilizar son: "+partida.getDado6().getTirada()[0]+", "+partida.getDado6().getTirada()[1]+", "
                 +partida.getDado6().getTirada()[2]+", "+partida.getDado6().getTirada()[3]+", "
                 +partida.getDado6().getTirada()[4]+", "+partida.getDado6().getTirada()[5]);
-        final EditText etExpresion = (EditText) this.findViewById(R.id.etExpresion);
+        final EditText etExpresion = (EditText) this.findViewById(R.id.etExpresion1);
         final Button btTurno = (Button) this.findViewById(R.id.btTurno);
-        final TextView tvTemporizador = (TextView) this.findViewById(R.id.tvTemporizador);
+        final TextView tvTemporizador = (TextView) this.findViewById(R.id.tvTemporizador1);
 
         new CountDownTimer(60000, 1000) {
 
