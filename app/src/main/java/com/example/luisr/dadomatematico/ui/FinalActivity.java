@@ -57,7 +57,7 @@ public class FinalActivity extends AppCompatActivity {
         }
         if(cola.size()==10){
             db = sqlDb.getWritableDatabase();
-            db.execSQL( "DELETE FROM historial WHERE fecha <> ?", new String[]{ cola.remove() } );
+            db.execSQL( "DELETE FROM historial WHERE fecha = ?", new String[]{ cola.remove() } );
         }
         db = sqlDb.getWritableDatabase();
         db.execSQL( "INSERT OR IGNORE INTO historial(fecha, resultado) VALUES( ?, ? )",
