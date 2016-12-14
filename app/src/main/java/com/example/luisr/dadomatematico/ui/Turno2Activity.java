@@ -52,17 +52,17 @@ public class Turno2Activity extends AppCompatActivity {
                 String resultado2 = "";
                 for(int i=1;i<etExpresion.getText().toString().length()+1;i++){
                     if (!(etExpresion.getText().toString().substring((i-1),i).equals("+")) &&
-                            !(etExpresion.getText().toString().substring((i-1),i).equals("*")) &&
-                            !(etExpresion.getText().toString().substring((i-1),i).equals("-")) &&
-                            !(etExpresion.getText().toString().substring((i-1),i).equals("/")) &&
-                            !(etExpresion.getText().toString().substring((i-1),i).equals("(")) &&
-                            !(etExpresion.getText().toString().substring((i-1),i).equals(")")) &&
-                            !(etExpresion.getText().toString().substring((i-1),i).equals(partida.getDado6().getTirada()[0])) &&
-                            !(etExpresion.getText().toString().substring((i-1),i).equals(partida.getDado6().getTirada()[1])) &&
-                            !(etExpresion.getText().toString().substring((i-1),i).equals(partida.getDado6().getTirada()[2])) &&
-                            !(etExpresion.getText().toString().substring((i-1),i).equals(partida.getDado6().getTirada()[3])) &&
-                            !(etExpresion.getText().toString().substring((i-1),i).equals(partida.getDado6().getTirada()[4])) &&
-                            !(etExpresion.getText().toString().substring((i-1),i).equals(partida.getDado6().getTirada()[5])))
+                        !(etExpresion.getText().toString().substring((i-1),i).equals("*")) &&
+                        !(etExpresion.getText().toString().substring((i-1),i).equals("-")) &&
+                        !(etExpresion.getText().toString().substring((i-1),i).equals("/")) &&
+                        !(etExpresion.getText().toString().substring((i-1),i).equals("(")) &&
+                        !(etExpresion.getText().toString().substring((i-1),i).equals(")")) &&
+                        !(etExpresion.getText().toString().substring((i-1),i).equals(partida.getDado6().getTirada()[0])) &&
+                        !(etExpresion.getText().toString().substring((i-1),i).equals(partida.getDado6().getTirada()[1])) &&
+                        !(etExpresion.getText().toString().substring((i-1),i).equals(partida.getDado6().getTirada()[2])) &&
+                        !(etExpresion.getText().toString().substring((i-1),i).equals(partida.getDado6().getTirada()[3])) &&
+                        !(etExpresion.getText().toString().substring((i-1),i).equals(partida.getDado6().getTirada()[4])) &&
+                        !(etExpresion.getText().toString().substring((i-1),i).equals(partida.getDado6().getTirada()[5])))
                     {
                         label=false;
                     }

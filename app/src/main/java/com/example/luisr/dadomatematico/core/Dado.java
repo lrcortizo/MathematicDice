@@ -1,16 +1,18 @@
 package com.example.luisr.dadomatematico.core;
+import java.io.Serializable;
 import java.math.*;
 
 /**
  * Created by luisr on 08/11/2016.
  */
 
-public class Dado {
+public class Dado implements Serializable{
     private int numCaras;
     private String [] tirada;
 
     public Dado(int n){
         numCaras=n;
+        tirada = new String[n];
     }
 
     public void lanzarDado(){

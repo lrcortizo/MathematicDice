@@ -17,4 +17,5 @@
     <string name="btTurno">Pasar turno</string>
     <string name="btTerminar">Terminar</string>
     <string name="btFin">Fin</string>
+    <string name="tvHistory">Historial de partidas:</string>
 </resources>

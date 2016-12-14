@@ -21,7 +21,7 @@ public class SQLite extends SQLiteOpenHelper{
     public void onCreate(SQLiteDatabase db) {
         db.beginTransaction();
         try {
-            db.execSQL("CREATE TABLE IF NOT EXISTS historial(fecha text PRIMARY KEY, resultado string NOT NULL)");
+            db.execSQL("CREATE TABLE IF NOT EXISTS historial(fecha string PRIMARY KEY, resultado string NOT NULL)");
             db.setTransactionSuccessful();
         } finally {
             db.endTransaction();

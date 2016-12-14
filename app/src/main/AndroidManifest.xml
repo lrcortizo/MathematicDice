@@ -15,7 +15,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.ScoreActivity" />
+        <activity android:name=".ui.HistoryActivity" />
         <activity android:name=".ui.PlayersActivity" />
         <activity android:name=".ui.DiceActivity" />
         <activity android:name=".ui.Turno1Activity" />
