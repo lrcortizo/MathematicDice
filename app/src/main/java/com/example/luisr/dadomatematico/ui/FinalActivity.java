@@ -1,19 +1,16 @@
 package com.example.luisr.dadomatematico.ui;
 
-import android.app.AlertDialog;
+
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.luisr.dadomatematico.R;
-import com.example.luisr.dadomatematico.core.App;
 import com.example.luisr.dadomatematico.core.Partida;
 import com.example.luisr.dadomatematico.core.SQLite;
 
@@ -44,7 +41,7 @@ public class FinalActivity extends AppCompatActivity {
         sb.append(calendar.get(Calendar.DAY_OF_MONTH) + "/" + (calendar.get(Calendar.MONTH)+1) + "/" + calendar.get(Calendar.YEAR));
         sb.append(" "+calendar.get(Calendar.HOUR_OF_DAY) + ":" + (calendar.get(Calendar.MINUTE)+1) + ":" + calendar.get(Calendar.SECOND));
         String fecha = sb.toString();
-        Queue<String> cola = new LinkedList<String>();
+        Queue<String> cola = new LinkedList<>();
         SQLite sqlDb = new SQLite(this.getApplicationContext());
         SQLiteDatabase db = sqlDb.getReadableDatabase();
         Cursor cursor = db.rawQuery( "SELECT fecha FROM historial", null );

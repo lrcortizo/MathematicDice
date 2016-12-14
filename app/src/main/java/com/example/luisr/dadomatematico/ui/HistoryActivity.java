@@ -1,19 +1,13 @@
 package com.example.luisr.dadomatematico.ui;
 
-import android.app.AlertDialog;
-import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.example.luisr.dadomatematico.R;
-import com.example.luisr.dadomatematico.core.App;
 import com.example.luisr.dadomatematico.core.SQLite;
 
 import java.util.ArrayList;
@@ -26,8 +20,7 @@ public class HistoryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
         ListView lvHistory = (ListView) this.findViewById( R.id.lvHistory );
-        history = new ArrayList<String>();
-        //SQLite sqlDb = ( (App) this.getApplication() ).getDb();
+        history = new ArrayList<>();
         SQLite sqlDb = new SQLite(this.getApplicationContext());
         SQLiteDatabase db = sqlDb.getReadableDatabase();
         Cursor cursor = db.rawQuery( "SELECT fecha, resultado FROM historial", null );
@@ -38,7 +31,7 @@ public class HistoryActivity extends AppCompatActivity {
             } while ( cursor.moveToNext() );
             cursor.close();
         }
-        historyAdapter=new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,history);
+        historyAdapter=new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,history);
         lvHistory.setAdapter(historyAdapter);
     }
 
