@@ -31,13 +31,14 @@
                 android:layout_width="146dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/button6"
-                android:layout_weight="0.86" />
+                android:layout_weight="0.50" />
 
             <Button
                 android:text="@string/button12"
                 android:layout_width="158dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/button12" />
+                android:id="@+id/button12"
+                android:layout_weight="0.46" />
         </LinearLayout>
 
         <LinearLayout
