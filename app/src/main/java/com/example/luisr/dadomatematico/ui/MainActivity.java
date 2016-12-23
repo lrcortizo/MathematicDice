@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
         final Button btGame = (Button) this.findViewById( R.id.btGame );
         final Button btScore = (Button) this.findViewById( R.id.btScore );
         final Button btExit = (Button) this.findViewById( R.id.btExit );
-        final Button btLanugage = (Button) this.findViewById( R.id.btLanguage );
+        final Button btLanguage = (Button) this.findViewById( R.id.btLanguage );
 //-----------------------------------BUTTON LISTENERS---------------------------------------------
         btGame.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        btLanugage.setOnClickListener(new View.OnClickListener() {
+        btLanguage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent (v.getContext(), LanguageActivity.class);

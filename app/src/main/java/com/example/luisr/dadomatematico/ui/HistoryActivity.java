@@ -1,9 +1,12 @@
 package com.example.luisr.dadomatematico.ui;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -34,5 +37,24 @@ public class HistoryActivity extends AppCompatActivity {
         historyAdapter=new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,history);
         lvHistory.setAdapter(historyAdapter);
     }
-
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        super.onCreateOptionsMenu(menu);
+        this.getMenuInflater().inflate(R.menu.history_menu, menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem menuItem){
+        boolean toret = false;
+        if (menuItem.getItemId()==R.id.opDelete){
+            SQLite sqlDb = new SQLite(this.getApplicationContext());
+            SQLiteDatabase db = sqlDb.getWritableDatabase();
+            db.execSQL( "DELETE FROM historial" );
+            toret = true;
+            Intent refresh = new Intent(this, HistoryActivity.class);
+            startActivity(refresh);
+            finish();
+        }
+        return toret;
+    }
 }
