@@ -34,8 +34,8 @@ public class Partida implements Serializable {
 
     public String ganador(){
         String toRet = "";
-        int r1 = Integer.parseInt(resultado1);
-        int r2 = Integer.parseInt(resultado2);
+        double r1 = Double.parseDouble(resultado1);
+        double r2 = Double.parseDouble(resultado2);
         if(r1==r2){
             toRet = "Empate entre "+jugador1+" y "+jugador2;
         } else if(r1<objetivo && r2<objetivo){
