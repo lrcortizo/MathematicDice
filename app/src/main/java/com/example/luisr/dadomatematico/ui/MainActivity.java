@@ -8,6 +8,8 @@ import android.widget.Button;
 
 import com.example.luisr.dadomatematico.R;
 
+import static com.example.luisr.dadomatematico.R.id.btLanguage;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -18,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
         final Button btGame = (Button) this.findViewById( R.id.btGame );
         final Button btScore = (Button) this.findViewById( R.id.btScore );
         final Button btExit = (Button) this.findViewById( R.id.btExit );
-
+        final Button btLanugage = (Button) this.findViewById( R.id.btLanguage );
 //-----------------------------------BUTTON LISTENERS---------------------------------------------
         btGame.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -31,6 +33,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent (v.getContext(), HistoryActivity.class);
+                startActivityForResult(intent, 0);
+            }
+        });
+
+        btLanugage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent (v.getContext(), LanguageActivity.class);
                 startActivityForResult(intent, 0);
             }
         });

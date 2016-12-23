@@ -20,7 +20,8 @@
         <activity android:name=".ui.DiceActivity" />
         <activity android:name=".ui.Turno1Activity" />
         <activity android:name=".ui.Turno2Activity" />
-        <activity android:name=".ui.FinalActivity"></activity>
+        <activity android:name=".ui.FinalActivity" />
+        <activity android:name=".ui.LanguageActivity"></activity>
     </application>
 
 </manifest>

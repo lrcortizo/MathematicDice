@@ -79,11 +79,11 @@ public class Turno2Activity extends AppCompatActivity {
                     builder.create().show();
                 }else{
                     try {
-                        resultado2 = calc(etExpresion.getText().toString());
+                        resultado2 = calc(etExpresion.getText().toString(), partida);
                     }catch (Exception e){
                         AlertDialog.Builder builder = new AlertDialog.Builder( Turno2Activity.this );
                         builder.setTitle( "Error" );
-                        builder.setMessage( "Formato incorrecto" );
+                        builder.setMessage( "Formato incorrecto" +e.getMessage());
                         builder.create().show();
                     }
                     if(!resultado2.equals("")) {
@@ -97,29 +97,33 @@ public class Turno2Activity extends AppCompatActivity {
         });
     }
 
-    public static String calc(String expresion){
-
-        Object[] params = new Object[] { "javaScriptParam" };
+    public static String calc(String expresion, Partida partida) throws Exception{
 
         Context rhino = Context.enter();
 
         rhino.setOptimizationLevel(-1);
-        try {
+        for(int i=1;i<expresion.length()+1;i++){
+            if (!(expresion.substring((i-1),i).equals("+")) &&
+                    !(expresion.substring((i-1),i).equals("*")) &&
+                    !(expresion.substring((i-1),i).equals("-")) &&
+                    !(expresion.substring((i-1),i).equals("/")) &&
+                    !(expresion.substring((i-1),i).equals("(")) &&
+                    !(expresion.substring((i-1),i).equals(")")) &&
+                    !(expresion.substring((i-1),i).equals(partida.getDado6().getTirada()[0])) &&
+                    !(expresion.substring((i-1),i).equals(partida.getDado6().getTirada()[1])) &&
+                    !(expresion.substring((i-1),i).equals(partida.getDado6().getTirada()[2])) &&
+                    !(expresion.substring((i-1),i).equals(partida.getDado6().getTirada()[3])) &&
+                    !(expresion.substring((i-1),i).equals(partida.getDado6().getTirada()[4])) &&
+                    !(expresion.substring((i-1),i).equals(partida.getDado6().getTirada()[5])))
+            {
+                throw new Exception("aaaaaa");
+            }
+        }
             Scriptable scope = rhino.initStandardObjects();
 
-            String expr = expresion.replaceAll("NOT", "!");
-            expr = expr.replaceAll("OR", "|");
-            expr = expr.replaceAll("AND", "&");
-
-            String toRet = rhino.evaluateString(scope, expr, "JavaScript", 1, null).toString().replaceAll(".0","");
-            toRet = toRet.replaceAll("true","1");
-            toRet = toRet.replaceAll("false","0");
+            String toRet = rhino.evaluateString(scope, expresion, "JavaScript", 1, null).toString().replaceAll(".0","");
 
             return toRet;
-
-        } finally {
-            Context.exit();
-        }
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
