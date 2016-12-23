@@ -59,6 +59,7 @@ public class DiceActivity extends AppCompatActivity {
                     Intent intent = new Intent(v.getContext(), Turno1Activity.class);
                     intent.putExtra("partida", partida);
                     startActivityForResult(intent, 0);
+                    finish();
                 }else{
                     AlertDialog.Builder builder = new AlertDialog.Builder( DiceActivity.this );
                     builder.setTitle( "Error" );
@@ -89,6 +90,7 @@ public class DiceActivity extends AppCompatActivity {
             case R.id.opSalir:
                 Intent Activity = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(Activity);
+                finish();
                 toret = true;
                 break;
         }

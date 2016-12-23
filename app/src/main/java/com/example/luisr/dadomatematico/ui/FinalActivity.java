@@ -64,6 +64,7 @@ public class FinalActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent Activity = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(Activity);
+                finish();
             }
         });
     }

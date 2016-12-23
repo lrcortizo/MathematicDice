@@ -29,7 +29,7 @@ public class HistoryActivity extends AppCompatActivity {
         Cursor cursor = db.rawQuery( "SELECT fecha, resultado FROM historial", null );
         if ( cursor.moveToFirst() ) {
             do {
-                String partida = cursor.getString( 0 )+": "+cursor.getString( 1 );
+                String partida = cursor.getString( 0 )+" ► "+cursor.getString( 1 );
                 history.add(partida);
             } while ( cursor.moveToNext() );
             cursor.close();

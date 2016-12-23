@@ -74,6 +74,7 @@ public class Turno1Activity extends AppCompatActivity {
                         Intent intent = new Intent(v.getContext(), Turno2Activity.class);
                         intent.putExtra("partida", partida);
                         startActivityForResult(intent, 0);
+                        finish();
                     }
                 }
             }
@@ -130,6 +131,7 @@ public class Turno1Activity extends AppCompatActivity {
             case R.id.opSalir:
                 Intent Activity = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(Activity);
+                finish();
                 toret = true;
                 break;
         }
