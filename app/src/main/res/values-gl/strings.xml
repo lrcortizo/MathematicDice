@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="btEnglish">Inglés</string>
+    <string name="btExit">Saír</string>
+    <string name="btFin">Fin</string>
+    <string name="btGalician">Galego</string>
+    <string name="btGame">Xogar</string>
+    <string name="btLanguage">Idioma</string>
+    <string name="btPlay">Xogar</string>
+    <string name="btScore">Puntuacións</string>
+    <string name="btSpanish">Español</string>
+    <string name="btStart">Comezar</string>
+    <string name="btTerminar">Rematar</string>
+    <string name="btTurno">Pasar turno</string>
+    <string name="button12">Lanzar dado 12 caras</string>
+    <string name="button6">Lanzar dado 6 caras</string>
+    <string name="opAñadirJugador">Engadir xogador</string>
+    <string name="opDelete">Borrar historial</string>
+    <string name="opElimina">Eliminar</string>
+    <string name="opHelp">Axuda</string>
+    <string name="opSalir">Saír</string>
+    <string name="tvExpresion">Escribe o resultado:</string>
+    <string name="tvHistory">Historial de partidas:</string>
+    <string name="tvJugador1">Nome do xogador 1:</string>
+    <string name="tvJugador2">Nome do xogador 2:</string>
+</resources>

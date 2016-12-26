@@ -18,9 +18,9 @@ public class LanguageActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_language);
-        Button btEnglish = (Button)findViewById(R.id.btEnglish);
-        Button btSpanish = (Button)findViewById(R.id.btSpanish);
-
+        Button btEnglish = (Button) findViewById(R.id.btEnglish);
+        Button btSpanish = (Button) findViewById(R.id.btSpanish);
+        Button btGalician = (Button) findViewById(R.id.btGalician);
         btEnglish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -36,6 +36,17 @@ public class LanguageActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 locale = new Locale("es");
+                config.locale = locale;
+                getResources().updateConfiguration(config, null);
+                Intent refresh = new Intent(v.getContext(), MainActivity.class);
+                startActivity(refresh);
+                finish();
+            }
+        });
+        btGalician.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                locale = new Locale("gl");
                 config.locale = locale;
                 getResources().updateConfiguration(config, null);
                 Intent refresh = new Intent(v.getContext(), MainActivity.class);
