@@ -122,7 +122,7 @@ public class Turno2Activity extends AppCompatActivity {
         }
             Scriptable scope = rhino.initStandardObjects();
 
-            String toRet = rhino.evaluateString(scope, expresion, "JavaScript", 1, null).toString().replaceAll(".0","");
+            String toRet = rhino.evaluateString(scope, expresion, "JavaScript", 1, null).toString();
 
             return toRet;
     }
