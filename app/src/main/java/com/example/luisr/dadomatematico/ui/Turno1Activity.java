@@ -18,7 +18,15 @@ import com.example.luisr.dadomatematico.core.Partida;
 import org.mozilla.javascript.*;
 
 public class Turno1Activity extends AppCompatActivity {
-
+    private String help = this.getString(R.string.help);
+    private String helpmessage = this.getString(R.string.helpturno);
+    private String textobjetivo = this.getString(R.string.helpturno);
+    private String textnumeros = this.getString(R.string.helpturno);
+    private String error = this.getString(R.string.error);
+    private String error1 = this.getString(R.string.errorturno1);
+    private String error2 = this.getString(R.string.errorturno2);
+    private String error3 = this.getString(R.string.errorturno3);
+    private String tiempo = this.getString(R.string.tiempo);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,8 +34,8 @@ public class Turno1Activity extends AppCompatActivity {
         final Partida partida = (Partida)getIntent().getExtras().getSerializable("partida");
         final TextView tvObjetivo = (TextView) this.findViewById(R.id.tvObjetivo1);
         final TextView tvCifras = (TextView) this.findViewById(R.id.tvCifras1);
-        tvObjetivo.setText("El objetivo es:"+partida.getObjetivo());
-        tvCifras.setText("Los numeros a utilizar son: "+partida.getDado6().getTirada()[0]+", "+partida.getDado6().getTirada()[1]+", "
+        tvObjetivo.setText(textobjetivo+" "+partida.getObjetivo());
+        tvCifras.setText(textnumeros+" "+partida.getDado6().getTirada()[0]+", "+partida.getDado6().getTirada()[1]+", "
                 +partida.getDado6().getTirada()[2]+", "+partida.getDado6().getTirada()[3]+", "
                 +partida.getDado6().getTirada()[4]+", "+partida.getDado6().getTirada()[5]);
         final EditText etExpresion = (EditText) this.findViewById(R.id.etExpresion1);
@@ -37,7 +45,7 @@ public class Turno1Activity extends AppCompatActivity {
         new CountDownTimer(60000, 1000) {
 
             public void onTick(long millisUntilFinished) {
-                tvTemporizador.setText("seconds remaining: " + millisUntilFinished / 1000);
+                tvTemporizador.setText(tiempo+" " + millisUntilFinished / 1000);
             }
 
             public void onFinish() {
@@ -52,21 +60,21 @@ public class Turno1Activity extends AppCompatActivity {
 
                 if(etExpresion.getText().toString().isEmpty()){
                     AlertDialog.Builder builder = new AlertDialog.Builder( Turno1Activity.this );
-                    builder.setTitle( "Error" );
-                    builder.setMessage( "Introduce un resultado" );
+                    builder.setTitle( error );
+                    builder.setMessage( error1 );
                     builder.create().show();
                 }else if(etExpresion.getText().toString().length()==1){
                     AlertDialog.Builder builder = new AlertDialog.Builder( Turno1Activity.this );
-                    builder.setTitle( "Error" );
-                    builder.setMessage( "Formato incorrecto1" );
+                    builder.setTitle( error );
+                    builder.setMessage( error2 );
                     builder.create().show();
                 }else{
                     try {
                         resultado = calc(etExpresion.getText().toString(), partida);
                     }catch (Exception e){
                         AlertDialog.Builder builder = new AlertDialog.Builder( Turno1Activity.this );
-                        builder.setTitle( "Error" );
-                        builder.setMessage( "Formato incorrecto2 "+e.getMessage() );
+                        builder.setTitle( error );
+                        builder.setMessage( e.getMessage() );
                         builder.create().show();
                     }
                     if(!resultado.equals("")) {
@@ -82,9 +90,9 @@ public class Turno1Activity extends AppCompatActivity {
         });
     }
 
-    public static String calc(String expresion, Partida partida) throws Exception{
+    public String calc(String expresion, Partida partida) throws Exception{
         Context rhino = Context.enter();
-        rhino.setOptimizationLevel(-1);
+        rhino.setOptimizationLevel(-1);;
         for(int i=1;i<expresion.length()+1;i++){
             if (!(expresion.substring((i-1),i).equals("+")) &&
                     !(expresion.substring((i-1),i).equals("*")) &&
@@ -99,7 +107,7 @@ public class Turno1Activity extends AppCompatActivity {
                     !(expresion.substring((i-1),i).equals(partida.getDado6().getTirada()[4])) &&
                     !(expresion.substring((i-1),i).equals(partida.getDado6().getTirada()[5])))
             {
-                    throw new Exception("aaaaaa");
+                    throw new Exception(error3);
             }
         }
 
@@ -141,8 +149,8 @@ public class Turno1Activity extends AppCompatActivity {
     public void help(){
         final TextView t = new TextView(this);
         AlertDialog.Builder builder = new AlertDialog.Builder( this );
-        builder.setTitle("Help");
-        builder.setMessage( "Escribe una expresion matematica para llegar al objetivo" );
+        builder.setTitle(help);
+        builder.setMessage( helpmessage );
         builder.create().show();
 
     }

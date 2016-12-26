@@ -23,4 +23,24 @@
     <string name="tvHistory">Historial de partidas:</string>
     <string name="tvJugador1">Nome do xogador 1:</string>
     <string name="tvJugador2">Nome do xogador 2:</string>
+    <string name="y">e</string>
+    <string name="tiempo">Quedan:</string>
+    <string name="resultado">Resultado de</string>
+    <string name="dado12">Reultado del lanzamento dos dados de 12 caras:</string>
+    <string name="dado6">Reultado del lanzamento dos dados de 6 caras:</string>
+    <string name="empate">Empate entre</string>
+    <string name="error">Erro</string>
+    <string name="objetivo">A cifra obxetivo é:</string>
+    <string name="numeros">Os números a usar son:</string>
+    <string name="help">Axuda</string>
+    <string name="ganar">gana a</string>
+    <string name="helpdados">Pulsa os botóns para lanzar os dados</string>
+    <string name="helpplayers">Escribe os nomes dos xogadores e pulsa comezar</string>
+    <string name="helpturno">Escribe unha expresión matemática para chegar ao obxetivo</string>
+    <string name="errorturno3">Formato incorrecto, caracteres non válidos</string>
+    <string name="errorturno2">Formato incorrecto, introduce unha operación</string>
+    <string name="errorturno1">Introduce un resultado</string>
+    <string name="errorplayers2">Escribe os nomes dos xogadores antes de continuar</string>
+    <string name="errorplayers1">Nomes de xogadores iguais</string>
+    <string name="errordice">Lanza os dados antes de comezar</string>
 </resources>

@@ -17,6 +17,11 @@ import com.example.luisr.dadomatematico.core.Partida;
 
 public class PlayersActivity extends AppCompatActivity {
     private Partida partida;
+    private String help = this.getString(R.string.help);
+    private String helpmessage = this.getString(R.string.helpplayers);
+    private String error = this.getString(R.string.error);
+    private String error1 = this.getString(R.string.errorplayers1);
+    private String error2 = this.getString(R.string.errorplayers2);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,8 +36,8 @@ public class PlayersActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(etJugador1.getText().toString().equals(etJugador2.getText().toString())){
                     AlertDialog.Builder builder = new AlertDialog.Builder( PlayersActivity.this );
-                    builder.setTitle( "Error" );
-                    builder.setMessage( "Nombres de jugadores iguales" );
+                    builder.setTitle( error );
+                    builder.setMessage(error1);
                     builder.create().show();
                 } else if (!etJugador1.getText().toString().isEmpty() && !etJugador2.getText().toString().isEmpty()
                                 && !(etJugador1.getText().toString().equals(etJugador2.getText().toString()))) {
@@ -43,8 +48,8 @@ public class PlayersActivity extends AppCompatActivity {
                     finish();
                 }else{
                     AlertDialog.Builder builder = new AlertDialog.Builder( PlayersActivity.this );
-                    builder.setTitle( "Error" );
-                    builder.setMessage( "Escribe los nombres de los jugadores antes de continuar" );
+                    builder.setTitle( error );
+                    builder.setMessage( error2 );
                     builder.create().show();
                 }
             }
@@ -79,8 +84,8 @@ public class PlayersActivity extends AppCompatActivity {
     public void help(){
         final TextView t = new TextView(this);
         AlertDialog.Builder builder = new AlertDialog.Builder( this );
-        builder.setTitle("Help");
-        builder.setMessage( "Escribe el nombre de los jugadores y pulsa comenzar" );
+        builder.setTitle(help);
+        builder.setMessage(helpmessage);
         builder.create().show();
 
     }

@@ -18,7 +18,15 @@ import com.example.luisr.dadomatematico.core.Partida;
 import org.mozilla.javascript.*;
 
 public class Turno2Activity extends AppCompatActivity {
-
+    private String help = this.getString(R.string.help);
+    private String helpmessage = this.getString(R.string.helpturno);
+    private String textobjetivo = this.getString(R.string.helpturno);
+    private String textnumeros = this.getString(R.string.helpturno);
+    private String error = this.getString(R.string.error);
+    private String error1 = this.getString(R.string.errorturno1);
+    private String error2 = this.getString(R.string.errorturno2);
+    private String error3 = this.getString(R.string.errorturno3);
+    private String tiempo = this.getString(R.string.tiempo);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,11 +41,10 @@ public class Turno2Activity extends AppCompatActivity {
         final EditText etExpresion = (EditText) this.findViewById(R.id.etExpresion2);
         final Button btTerminar = (Button) this.findViewById(R.id.btTerminar);
         final TextView tvTemporizador = (TextView) this.findViewById(R.id.tvTemporizador2);
-
         new CountDownTimer(60000, 1000) {
 
             public void onTick(long millisUntilFinished) {
-                tvTemporizador.setText("seconds remaining: " + millisUntilFinished / 1000);
+                tvTemporizador.setText(tiempo+" " + millisUntilFinished / 1000);
             }
 
             public void onFinish() {
@@ -69,21 +76,21 @@ public class Turno2Activity extends AppCompatActivity {
                 }
                 if(etExpresion.getText().toString().isEmpty()){
                     AlertDialog.Builder builder = new AlertDialog.Builder( Turno2Activity.this );
-                    builder.setTitle( "Error" );
-                    builder.setMessage( "Introduce un resultado" );
+                    builder.setTitle( error );
+                    builder.setMessage( error1 );
                     builder.create().show();
                 }else if(!label || etExpresion.getText().toString().length()==1){
                     AlertDialog.Builder builder = new AlertDialog.Builder( Turno2Activity.this );
-                    builder.setTitle( "Error" );
-                    builder.setMessage( "Formato incorrecto" );
+                    builder.setTitle( error );
+                    builder.setMessage( error2 );
                     builder.create().show();
                 }else{
                     try {
                         resultado2 = calc(etExpresion.getText().toString(), partida);
                     }catch (Exception e){
                         AlertDialog.Builder builder = new AlertDialog.Builder( Turno2Activity.this );
-                        builder.setTitle( "Error" );
-                        builder.setMessage( "Formato incorrecto" +e.getMessage());
+                        builder.setTitle( error );
+                        builder.setMessage( e.getMessage());
                         builder.create().show();
                     }
                     if(!resultado2.equals("")) {
@@ -98,7 +105,7 @@ public class Turno2Activity extends AppCompatActivity {
         });
     }
 
-    public static String calc(String expresion, Partida partida) throws Exception{
+    public String calc(String expresion, Partida partida) throws Exception{
 
         Context rhino = Context.enter();
 
@@ -117,7 +124,7 @@ public class Turno2Activity extends AppCompatActivity {
                     !(expresion.substring((i-1),i).equals(partida.getDado6().getTirada()[4])) &&
                     !(expresion.substring((i-1),i).equals(partida.getDado6().getTirada()[5])))
             {
-                throw new Exception("aaaaaa");
+                throw new Exception(error3);
             }
         }
             Scriptable scope = rhino.initStandardObjects();
@@ -154,8 +161,8 @@ public class Turno2Activity extends AppCompatActivity {
     public void help(){
         final TextView t = new TextView(this);
         AlertDialog.Builder builder = new AlertDialog.Builder( this );
-        builder.setTitle("Help");
-        builder.setMessage( "Escribe una expresion matematica para llegar al objetivo" );
+        builder.setTitle(help);
+        builder.setMessage( helpmessage );
         builder.create().show();
     }
 }

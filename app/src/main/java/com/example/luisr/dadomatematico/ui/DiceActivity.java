@@ -20,6 +20,13 @@ import com.example.luisr.dadomatematico.core.Partida;
 public class DiceActivity extends AppCompatActivity {
     private boolean label6 = false;
     private boolean label12 = false;
+    private String help = this.getString(R.string.help);
+    private String helpmessage = this.getString(R.string.helpdados);
+    private String error = this.getString(R.string.error);
+    private String errormessage = this.getString(R.string.errordice);
+    private String textdado6 = this.getString(R.string.dado6);
+    private String textdado12 = this.getString(R.string.dado12);
+    private String textobjetivo = this.getString(R.string.objetivo);
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +45,7 @@ public class DiceActivity extends AppCompatActivity {
         bt6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                tvDados6.setText("Reultado del lanzamiento de los dados de 6 caras: "+dado6.getTirada()[0]+", "+dado6.getTirada()[1]+", "
+                tvDados6.setText(textdado6+" "+dado6.getTirada()[0]+", "+dado6.getTirada()[1]+", "
                         +dado6.getTirada()[2]+", "+dado6.getTirada()[3]+", "+dado6.getTirada()[4]+", "+dado6.getTirada()[5]);
                 label6=true;
             }
@@ -46,8 +53,8 @@ public class DiceActivity extends AppCompatActivity {
         bt12.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                tvDados12.setText("Reultado del lanzamiento de los dados de 12 caras: "+dado12.getTirada()[0]+", "+dado12.getTirada()[1]);
-                tvDice.setText("La cifra objetivo es: "+(Integer.parseInt(dado12.getTirada()[0])*Integer.parseInt(dado12.getTirada()[1])));
+                tvDados12.setText(textdado12+" "+dado12.getTirada()[0]+", "+dado12.getTirada()[1]);
+                tvDice.setText(textobjetivo+" "+(Integer.parseInt(dado12.getTirada()[0])*Integer.parseInt(dado12.getTirada()[1])));
                 label12=true;
             }
         });
@@ -62,8 +69,8 @@ public class DiceActivity extends AppCompatActivity {
                     finish();
                 }else{
                     AlertDialog.Builder builder = new AlertDialog.Builder( DiceActivity.this );
-                    builder.setTitle( "Error" );
-                    builder.setMessage( "Lanza los dados antes de continuar" );
+                    builder.setTitle( error );
+                    builder.setMessage( errormessage );
                     builder.create().show();
 
                 }
@@ -100,8 +107,8 @@ public class DiceActivity extends AppCompatActivity {
     public void help(){
         final TextView t = new TextView(this);
         AlertDialog.Builder builder = new AlertDialog.Builder( this );
-        builder.setTitle("Help");
-        builder.setMessage( "Pulsa los botones para lanzar los dados" );
+        builder.setTitle(help);
+        builder.setMessage(helpmessage);
         builder.create().show();
 
     }

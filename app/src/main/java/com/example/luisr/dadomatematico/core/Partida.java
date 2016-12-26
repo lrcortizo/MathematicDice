@@ -37,34 +37,34 @@ public class Partida implements Serializable {
         double r1 = Double.parseDouble(resultado1);
         double r2 = Double.parseDouble(resultado2);
         if(r1==r2){
-            toRet = "Empate entre "+jugador1+" y "+jugador2;
+            toRet = "Empate";
         } else if(r1<objetivo && r2<objetivo){
             if(r1>r2){
-                toRet = jugador1+" gana a "+jugador2;
+                toRet = jugador1;
             } else{
-                toRet = jugador2+" gana a "+jugador1;
+                toRet = jugador2;
             }
         } else if(r1>objetivo && r2>objetivo){
             if(r1<r2){
-                toRet = jugador1+" gana a "+jugador2;
+                toRet = jugador1;
             } else{
-                toRet = jugador2+" gana a "+jugador1;
+                toRet = jugador2;
             }
         } else if(r1>objetivo && r2<objetivo){
             if((r1-objetivo)==(objetivo-r2)){
-                toRet = "Empate entre "+jugador1+" y "+jugador2;
+                toRet = "Empate";
             } else if((r1-objetivo)<(objetivo-r2)){
-                toRet = jugador1+" gana a "+jugador2;
+                toRet = jugador1;
             } else if((r1-objetivo)>(objetivo-r2)){
-                toRet = jugador2+" gana a "+jugador1;
+                toRet = jugador2;
             }
         } else if(r1<objetivo && r2>objetivo){
             if((r2-objetivo)==(objetivo-r1)){
-                toRet = "Empate entre "+jugador1+" y "+jugador2;
+                toRet = "Empate";
             } else if((r2-objetivo)<(objetivo-r1)){
-                toRet = jugador2+" gana a "+jugador1;
+                toRet = jugador2;
             } else if((r2-objetivo)>(objetivo-r1)){
-                toRet = jugador1+" gana a "+jugador2;
+                toRet = jugador1;
             }
         }
         return toRet;

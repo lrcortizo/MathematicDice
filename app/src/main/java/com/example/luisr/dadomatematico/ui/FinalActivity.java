@@ -21,7 +21,11 @@ import java.util.Queue;
 
 
 public class FinalActivity extends AppCompatActivity {
-
+    private String textobjetivo = this.getString(R.string.objetivo);
+    private String textresultado = this.getString(R.string.resultado);
+    private String empate = this.getString(R.string.empate);
+    private String y = this.getString(R.string.y);
+    private String gana = this.getString(R.string.ganar);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,10 +36,16 @@ public class FinalActivity extends AppCompatActivity {
         final TextView tvResultado2 = (TextView) findViewById(R.id.tvResultado2);
         final TextView tvGanador = (TextView) findViewById(R.id.tvGanador);
         final Button btFin = (Button) findViewById(R.id.btFin);
-        tvObjetivo.setText("Objetivo: "+partida.getObjetivo());
-        tvResultado1.setText("Resultado de "+partida.getJugador1()+": "+partida.getResultado1());
-        tvResultado2.setText("Resultado de "+partida.getJugador2()+": "+partida.getResultado2());
-        tvGanador.setText(partida.ganador());
+        tvObjetivo.setText(textobjetivo+" "+partida.getObjetivo());
+        tvResultado1.setText(textresultado+" "+partida.getJugador1()+": "+partida.getResultado1());
+        tvResultado2.setText(textresultado+" "+partida.getJugador2()+": "+partida.getResultado2());
+        if (partida.ganador() == "Empate") {
+            tvGanador.setText(empate+" "+partida.getJugador1()+" "+y+" "+partida.getJugador2());
+        }else if(partida.ganador() == partida.getJugador1()){
+            tvGanador.setText(partida.getJugador1()+" "+gana+" "+partida.getJugador2());
+        }else{
+            tvGanador.setText(partida.getJugador2()+" "+gana+" "+partida.getJugador1());
+        }
         Calendar calendar = new GregorianCalendar();
         StringBuilder sb = new StringBuilder();
         sb.append(calendar.get(Calendar.DAY_OF_MONTH) + "/" + (calendar.get(Calendar.MONTH)+1) + "/" + calendar.get(Calendar.YEAR));
