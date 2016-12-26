@@ -32,14 +32,10 @@ public class Turno2Activity extends AppCompatActivity {
         final EditText etExpresion = (EditText) this.findViewById(R.id.etExpresion2);
         final Button btTerminar = (Button) this.findViewById(R.id.btTerminar);
         final TextView tvTemporizador = (TextView) this.findViewById(R.id.tvTemporizador2);
-        final String error = this.getString(R.string.error);
-        final String error1 = this.getString(R.string.errorturno1);
-        final String error2 = this.getString(R.string.errorturno2);
-        final String tiempo = this.getString(R.string.tiempo);
         new CountDownTimer(60000, 1000) {
 
             public void onTick(long millisUntilFinished) {
-                tvTemporizador.setText(tiempo+" " + millisUntilFinished / 1000);
+                tvTemporizador.setText(Turno2Activity.this.getString(R.string.tiempo)+" " + millisUntilFinished / 1000);
             }
 
             public void onFinish() {
@@ -75,20 +71,20 @@ public class Turno2Activity extends AppCompatActivity {
                 }
                 if(etExpresion.getText().toString().isEmpty()){
                     AlertDialog.Builder builder = new AlertDialog.Builder( Turno2Activity.this );
-                    builder.setTitle( error );
-                    builder.setMessage( error1 );
+                    builder.setTitle( Turno2Activity.this.getString(R.string.error) );
+                    builder.setMessage( Turno2Activity.this.getString(R.string.errorturno1) );
                     builder.create().show();
                 }else if(!label || etExpresion.getText().toString().length()==1){
                     AlertDialog.Builder builder = new AlertDialog.Builder( Turno2Activity.this );
-                    builder.setTitle( error );
-                    builder.setMessage( error2 );
+                    builder.setTitle( Turno2Activity.this.getString(R.string.error) );
+                    builder.setMessage( Turno2Activity.this.getString(R.string.errorturno2) );
                     builder.create().show();
                 }else{
                     try {
                         resultado2 = calc(etExpresion.getText().toString(), partida);
                     }catch (Exception e){
                         AlertDialog.Builder builder = new AlertDialog.Builder( Turno2Activity.this );
-                        builder.setTitle( error );
+                        builder.setTitle( Turno2Activity.this.getString(R.string.error) );
                         builder.setMessage( e.getMessage());
                         builder.create().show();
                     }

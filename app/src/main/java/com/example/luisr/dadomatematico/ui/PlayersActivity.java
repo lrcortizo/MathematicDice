@@ -25,17 +25,14 @@ public class PlayersActivity extends AppCompatActivity {
         final EditText etJugador1 = (EditText) this.findViewById(R.id.etJugador1);
         final EditText etJugador2 = (EditText) this.findViewById(R.id.etJugador2);
         final Button btStart = (Button) this.findViewById( R.id.btStart );
-        final String error = this.getString(R.string.error);
-        final String error1 = this.getString(R.string.errorplayers1);
-        final String error2 = this.getString(R.string.errorplayers2);
 
         btStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(etJugador1.getText().toString().equals(etJugador2.getText().toString())){
                     AlertDialog.Builder builder = new AlertDialog.Builder( PlayersActivity.this );
-                    builder.setTitle( error );
-                    builder.setMessage(error1);
+                    builder.setTitle( PlayersActivity.this.getString(R.string.error) );
+                    builder.setMessage(PlayersActivity.this.getString(R.string.errorplayers1));
                     builder.create().show();
                 } else if (!etJugador1.getText().toString().isEmpty() && !etJugador2.getText().toString().isEmpty()
                                 && !(etJugador1.getText().toString().equals(etJugador2.getText().toString()))) {
@@ -46,8 +43,8 @@ public class PlayersActivity extends AppCompatActivity {
                     finish();
                 }else{
                     AlertDialog.Builder builder = new AlertDialog.Builder( PlayersActivity.this );
-                    builder.setTitle( error );
-                    builder.setMessage( error2 );
+                    builder.setTitle( PlayersActivity.this.getString(R.string.error) );
+                    builder.setMessage( PlayersActivity.this.getString(R.string.errorplayers2) );
                     builder.create().show();
                 }
             }

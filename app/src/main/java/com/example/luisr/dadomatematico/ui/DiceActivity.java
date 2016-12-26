@@ -33,17 +33,12 @@ public class DiceActivity extends AppCompatActivity {
         final TextView tvDice = (TextView) this.findViewById(R.id.tvDice);
         final Dado dado6 = new Dado(6);
         final Dado dado12 = new Dado(12);
-        final String error = this.getString(R.string.error);
-        final String errormessage = this.getString(R.string.errordice);
-        final String textdado6 = this.getString(R.string.dado6);
-        final String textdado12 = this.getString(R.string.dado12);
-        final String textobjetivo = this.getString(R.string.objetivo);
         dado6.lanzarDado();
         dado12.lanzarDado();
         bt6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                tvDados6.setText(textdado6+" "+dado6.getTirada()[0]+", "+dado6.getTirada()[1]+", "
+                tvDados6.setText(DiceActivity.this.getString(R.string.dado6)+" "+dado6.getTirada()[0]+", "+dado6.getTirada()[1]+", "
                         +dado6.getTirada()[2]+", "+dado6.getTirada()[3]+", "+dado6.getTirada()[4]+", "+dado6.getTirada()[5]);
                 label6=true;
             }
@@ -51,8 +46,8 @@ public class DiceActivity extends AppCompatActivity {
         bt12.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                tvDados12.setText(textdado12+" "+dado12.getTirada()[0]+", "+dado12.getTirada()[1]);
-                tvDice.setText(textobjetivo+" "+(Integer.parseInt(dado12.getTirada()[0])*Integer.parseInt(dado12.getTirada()[1])));
+                tvDados12.setText(DiceActivity.this.getString(R.string.dado12)+" "+dado12.getTirada()[0]+", "+dado12.getTirada()[1]);
+                tvDice.setText(DiceActivity.this.getString(R.string.objetivo)+" "+(Integer.parseInt(dado12.getTirada()[0])*Integer.parseInt(dado12.getTirada()[1])));
                 label12=true;
             }
         });
@@ -67,8 +62,8 @@ public class DiceActivity extends AppCompatActivity {
                     finish();
                 }else{
                     AlertDialog.Builder builder = new AlertDialog.Builder( DiceActivity.this );
-                    builder.setTitle( error );
-                    builder.setMessage( errormessage );
+                    builder.setTitle( DiceActivity.this.getString(R.string.error) );
+                    builder.setMessage( DiceActivity.this.getString(R.string.errordice) );
                     builder.create().show();
 
                 }
