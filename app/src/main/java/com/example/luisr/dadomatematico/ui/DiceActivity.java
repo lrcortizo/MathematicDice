@@ -20,13 +20,6 @@ import com.example.luisr.dadomatematico.core.Partida;
 public class DiceActivity extends AppCompatActivity {
     private boolean label6 = false;
     private boolean label12 = false;
-    private String help = this.getString(R.string.help);
-    private String helpmessage = this.getString(R.string.helpdados);
-    private String error = this.getString(R.string.error);
-    private String errormessage = this.getString(R.string.errordice);
-    private String textdado6 = this.getString(R.string.dado6);
-    private String textdado12 = this.getString(R.string.dado12);
-    private String textobjetivo = this.getString(R.string.objetivo);
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +33,11 @@ public class DiceActivity extends AppCompatActivity {
         final TextView tvDice = (TextView) this.findViewById(R.id.tvDice);
         final Dado dado6 = new Dado(6);
         final Dado dado12 = new Dado(12);
+        final String error = this.getString(R.string.error);
+        final String errormessage = this.getString(R.string.errordice);
+        final String textdado6 = this.getString(R.string.dado6);
+        final String textdado12 = this.getString(R.string.dado12);
+        final String textobjetivo = this.getString(R.string.objetivo);
         dado6.lanzarDado();
         dado12.lanzarDado();
         bt6.setOnClickListener(new View.OnClickListener() {
@@ -107,8 +105,8 @@ public class DiceActivity extends AppCompatActivity {
     public void help(){
         final TextView t = new TextView(this);
         AlertDialog.Builder builder = new AlertDialog.Builder( this );
-        builder.setTitle(help);
-        builder.setMessage(helpmessage);
+        builder.setTitle(this.getString(R.string.help));
+        builder.setMessage(this.getString(R.string.helpdados));
         builder.create().show();
 
     }

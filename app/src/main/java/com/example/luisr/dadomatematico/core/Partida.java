@@ -36,7 +36,13 @@ public class Partida implements Serializable {
         String toRet = "";
         double r1 = Double.parseDouble(resultado1);
         double r2 = Double.parseDouble(resultado2);
-        if(r1==r2){
+        if(resultado1==null && resultado2==null){
+            toRet = "Empate";
+        }else if(resultado1==null){
+            toRet = jugador2;
+        }else if(resultado2==null){
+            toRet = jugador1;
+        }else if(r1==r2){
             toRet = "Empate";
         } else if(r1<objetivo && r2<objetivo){
             if(r1>r2){

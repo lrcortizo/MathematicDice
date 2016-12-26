@@ -18,15 +18,7 @@ import com.example.luisr.dadomatematico.core.Partida;
 import org.mozilla.javascript.*;
 
 public class Turno1Activity extends AppCompatActivity {
-    private String help = this.getString(R.string.help);
-    private String helpmessage = this.getString(R.string.helpturno);
-    private String textobjetivo = this.getString(R.string.helpturno);
-    private String textnumeros = this.getString(R.string.helpturno);
-    private String error = this.getString(R.string.error);
-    private String error1 = this.getString(R.string.errorturno1);
-    private String error2 = this.getString(R.string.errorturno2);
-    private String error3 = this.getString(R.string.errorturno3);
-    private String tiempo = this.getString(R.string.tiempo);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,14 +26,17 @@ public class Turno1Activity extends AppCompatActivity {
         final Partida partida = (Partida)getIntent().getExtras().getSerializable("partida");
         final TextView tvObjetivo = (TextView) this.findViewById(R.id.tvObjetivo1);
         final TextView tvCifras = (TextView) this.findViewById(R.id.tvCifras1);
-        tvObjetivo.setText(textobjetivo+" "+partida.getObjetivo());
-        tvCifras.setText(textnumeros+" "+partida.getDado6().getTirada()[0]+", "+partida.getDado6().getTirada()[1]+", "
+        tvObjetivo.setText(this.getString(R.string.objetivo)+" "+partida.getObjetivo());
+        tvCifras.setText(this.getString(R.string.numeros)+" "+partida.getDado6().getTirada()[0]+", "+partida.getDado6().getTirada()[1]+", "
                 +partida.getDado6().getTirada()[2]+", "+partida.getDado6().getTirada()[3]+", "
                 +partida.getDado6().getTirada()[4]+", "+partida.getDado6().getTirada()[5]);
         final EditText etExpresion = (EditText) this.findViewById(R.id.etExpresion1);
         final Button btTurno = (Button) this.findViewById(R.id.btTurno);
         final TextView tvTemporizador = (TextView) this.findViewById(R.id.tvTemporizador1);
-
+        final String error = this.getString(R.string.error);
+        final String error1 = this.getString(R.string.errorturno1);
+        final String error2 = this.getString(R.string.errorturno2);
+        final String tiempo = this.getString(R.string.tiempo);
         new CountDownTimer(60000, 1000) {
 
             public void onTick(long millisUntilFinished) {
@@ -49,7 +44,11 @@ public class Turno1Activity extends AppCompatActivity {
             }
 
             public void onFinish() {
-                tvTemporizador.setText("done!");
+                partida.setResultado1(null);
+                Intent intent = new Intent(Turno1Activity.this, Turno2Activity.class);
+                intent.putExtra("partida", partida);
+                startActivityForResult(intent, 0);
+                finish();
             }
         }.start();
 
@@ -107,7 +106,7 @@ public class Turno1Activity extends AppCompatActivity {
                     !(expresion.substring((i-1),i).equals(partida.getDado6().getTirada()[4])) &&
                     !(expresion.substring((i-1),i).equals(partida.getDado6().getTirada()[5])))
             {
-                    throw new Exception(error3);
+                    throw new Exception(this.getString(R.string.errorturno3));
             }
         }
 
@@ -149,8 +148,8 @@ public class Turno1Activity extends AppCompatActivity {
     public void help(){
         final TextView t = new TextView(this);
         AlertDialog.Builder builder = new AlertDialog.Builder( this );
-        builder.setTitle(help);
-        builder.setMessage( helpmessage );
+        builder.setTitle(this.getString(R.string.help));
+        builder.setMessage( this.getString(R.string.helpturno) );
         builder.create().show();
 
     }

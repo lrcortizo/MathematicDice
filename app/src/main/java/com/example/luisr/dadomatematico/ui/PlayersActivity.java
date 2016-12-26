@@ -17,11 +17,6 @@ import com.example.luisr.dadomatematico.core.Partida;
 
 public class PlayersActivity extends AppCompatActivity {
     private Partida partida;
-    private String help = this.getString(R.string.help);
-    private String helpmessage = this.getString(R.string.helpplayers);
-    private String error = this.getString(R.string.error);
-    private String error1 = this.getString(R.string.errorplayers1);
-    private String error2 = this.getString(R.string.errorplayers2);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +25,9 @@ public class PlayersActivity extends AppCompatActivity {
         final EditText etJugador1 = (EditText) this.findViewById(R.id.etJugador1);
         final EditText etJugador2 = (EditText) this.findViewById(R.id.etJugador2);
         final Button btStart = (Button) this.findViewById( R.id.btStart );
+        final String error = this.getString(R.string.error);
+        final String error1 = this.getString(R.string.errorplayers1);
+        final String error2 = this.getString(R.string.errorplayers2);
 
         btStart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,8 +82,8 @@ public class PlayersActivity extends AppCompatActivity {
     public void help(){
         final TextView t = new TextView(this);
         AlertDialog.Builder builder = new AlertDialog.Builder( this );
-        builder.setTitle(help);
-        builder.setMessage(helpmessage);
+        builder.setTitle(this.getString(R.string.help));
+        builder.setMessage(this.getString(R.string.helpplayers));
         builder.create().show();
 
     }
