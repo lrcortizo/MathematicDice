@@ -22,6 +22,7 @@ public class HistoryActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
+        //--------------------MOSTRAR LISTA BASE DE DATOS---------------------
         ListView lvHistory = (ListView) this.findViewById( R.id.lvHistory );
         history = new ArrayList<>();
         SQLite sqlDb = new SQLite(this.getApplicationContext());
@@ -37,6 +38,7 @@ public class HistoryActivity extends AppCompatActivity {
         historyAdapter=new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,history);
         lvHistory.setAdapter(historyAdapter);
     }
+    //---------------------------------OPTIONS MENU-----------------------------------
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         super.onCreateOptionsMenu(menu);

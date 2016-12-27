@@ -18,9 +18,11 @@ public class LanguageActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_language);
-        Button btEnglish = (Button) findViewById(R.id.btEnglish);
-        Button btSpanish = (Button) findViewById(R.id.btSpanish);
-        Button btGalician = (Button) findViewById(R.id.btGalician);
+        //-------------------------------WIDGETS AND TEXT FIELDS-------------------
+        final Button btEnglish = (Button) findViewById(R.id.btEnglish);
+        final Button btSpanish = (Button) findViewById(R.id.btSpanish);
+        final Button btGalician = (Button) findViewById(R.id.btGalician);
+        //--------------------------------------BUTTON LISTENERS--------------------
         btEnglish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

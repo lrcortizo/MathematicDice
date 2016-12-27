@@ -24,16 +24,18 @@ public class Turno2Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_turno2);
+        //-------------------------------WIDGETS AND TEXT FIELDS---------------
         final Partida partida = (Partida)getIntent().getExtras().getSerializable("partida");
         final TextView tvObjetivo = (TextView) this.findViewById(R.id.tvObjetivo2);
         final TextView tvCifras = (TextView) this.findViewById(R.id.tvCifras2);
+        final EditText etExpresion = (EditText) this.findViewById(R.id.etExpresion2);
+        final Button btTerminar = (Button) this.findViewById(R.id.btTerminar);
+        final TextView tvTemporizador = (TextView) this.findViewById(R.id.tvTemporizador2);
         tvObjetivo.setText(this.getString(R.string.objetivo)+" "+partida.getObjetivo());
         tvCifras.setText(this.getString(R.string.numeros)+" "+partida.getDado6().getTirada()[0]+", "+partida.getDado6().getTirada()[1]+", "
                 +partida.getDado6().getTirada()[2]+", "+partida.getDado6().getTirada()[3]+", "
                 +partida.getDado6().getTirada()[4]+", "+partida.getDado6().getTirada()[5]);
-        final EditText etExpresion = (EditText) this.findViewById(R.id.etExpresion2);
-        final Button btTerminar = (Button) this.findViewById(R.id.btTerminar);
-        final TextView tvTemporizador = (TextView) this.findViewById(R.id.tvTemporizador2);
+        //-------------------------------------TEMPORIZADOR------------------------------------
         final CountDownTimer temporizador = new CountDownTimer(60000, 1000) {
 
             public void onTick(long millisUntilFinished) {
@@ -51,40 +53,41 @@ public class Turno2Activity extends AppCompatActivity {
             }
         };
         temporizador.start();
-
+        //------------------------------------------BUTTON LISTENER----------------------------
         btTerminar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String resultado2 = "";
-
-                if(etExpresion.getText().toString().isEmpty()){
+            String resultado2 = "";
+            //---------------COMPROBACION CAMPO VACÍO Y CARACTERES VÁLIDOS-----------------
+            if(etExpresion.getText().toString().isEmpty()){
+                AlertDialog.Builder builder = new AlertDialog.Builder( Turno2Activity.this );
+                builder.setTitle( Turno2Activity.this.getString(R.string.error) );
+                builder.setMessage( Turno2Activity.this.getString(R.string.errorturno1) );
+                builder.create().show();
+            }else if(etExpresion.getText().toString().length()==1){
+                AlertDialog.Builder builder = new AlertDialog.Builder( Turno2Activity.this );
+                builder.setTitle( Turno2Activity.this.getString(R.string.error) );
+                builder.setMessage( Turno2Activity.this.getString(R.string.errorturno2) );
+                builder.create().show();
+            }else{
+                try {
+                    //---------EVALUAR EXPRESION MATEMATICA----------------
+                    resultado2 = calc(etExpresion.getText().toString(), partida);
+                }catch (Exception e){
                     AlertDialog.Builder builder = new AlertDialog.Builder( Turno2Activity.this );
                     builder.setTitle( Turno2Activity.this.getString(R.string.error) );
-                    builder.setMessage( Turno2Activity.this.getString(R.string.errorturno1) );
+                    builder.setMessage( e.getMessage());
                     builder.create().show();
-                }else if(etExpresion.getText().toString().length()==1){
-                    AlertDialog.Builder builder = new AlertDialog.Builder( Turno2Activity.this );
-                    builder.setTitle( Turno2Activity.this.getString(R.string.error) );
-                    builder.setMessage( Turno2Activity.this.getString(R.string.errorturno2) );
-                    builder.create().show();
-                }else{
-                    try {
-                        resultado2 = calc(etExpresion.getText().toString(), partida);
-                    }catch (Exception e){
-                        AlertDialog.Builder builder = new AlertDialog.Builder( Turno2Activity.this );
-                        builder.setTitle( Turno2Activity.this.getString(R.string.error) );
-                        builder.setMessage( e.getMessage());
-                        builder.create().show();
-                    }
-                    if(!resultado2.equals("")) {
-                        partida.setResultado2(resultado2);
-                        Intent intent = new Intent(v.getContext(), FinalActivity.class);
-                        intent.putExtra("partida", partida);
-                        startActivityForResult(intent, 0);
-                        finish();
-                        temporizador.cancel();
-                    }
                 }
+                if(!resultado2.equals("")) {
+                    partida.setResultado2(resultado2);
+                    Intent intent = new Intent(v.getContext(), FinalActivity.class);
+                    intent.putExtra("partida", partida);
+                    startActivityForResult(intent, 0);
+                    finish();
+                    temporizador.cancel();
+                }
+            }
             }
         });
     }
@@ -99,7 +102,7 @@ public class Turno2Activity extends AppCompatActivity {
         super.onResume();
         label = true;
     }
-
+    //-------------------------EVALUATE MATH EXPRESION----------------------
     public String calc(String expresion, Partida partida) throws Exception{
         Context rhino = Context.enter();
         boolean label0=false;
@@ -109,6 +112,7 @@ public class Turno2Activity extends AppCompatActivity {
         boolean label4=false;
         boolean label5=false;
         rhino.setOptimizationLevel(-1);
+        //----------------COMPROBACIÓN CARACTERES PERMITIDOS-----------------------------
         for(int i=1;i<expresion.length()+1;i++){
             if (!(expresion.substring((i-1),i).equals("+")) &&
                     !(expresion.substring((i-1),i).equals("*")) &&
@@ -151,6 +155,8 @@ public class Turno2Activity extends AppCompatActivity {
 
         return toRet;
     }
+
+    //---------------------------------OPTIONS MENU-----------------------------------
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         super.onCreateOptionsMenu(menu);

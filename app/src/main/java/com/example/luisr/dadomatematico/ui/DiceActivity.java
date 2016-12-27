@@ -20,10 +20,11 @@ import com.example.luisr.dadomatematico.core.Partida;
 public class DiceActivity extends AppCompatActivity {
     private boolean label6 = false;
     private boolean label12 = false;
-    private final int REQUEST_CODE = 1;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dice);
+        //-------------------------------WIDGETS AND TEXT FIELDS------------------
         final Partida partida = (Partida)getIntent().getExtras().getSerializable("partida");
         final Button btPlay =(Button) this.findViewById(R.id.btPlay);
         final Button bt6 = (Button) this.findViewById( R.id.button6 );
@@ -31,10 +32,12 @@ public class DiceActivity extends AppCompatActivity {
         final TextView tvDados6 = (TextView) this.findViewById(R.id.tvDados6);
         final TextView tvDados12 = (TextView) this.findViewById(R.id.tvDados12);
         final TextView tvDice = (TextView) this.findViewById(R.id.tvDice);
+        //------------------------------LANZAR DADOS--------------------------
         final Dado dado6 = new Dado(6);
         final Dado dado12 = new Dado(12);
         dado6.lanzarDado();
         dado12.lanzarDado();
+        //------------------------------------------BUTTON LISTENERS-----------------------------
         bt6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -54,11 +57,12 @@ public class DiceActivity extends AppCompatActivity {
         btPlay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //-----------COMPROBACION DADOS LANZADOS---------------
                 if(label6 && label12) {
                     partida.setDados(dado6, Integer.parseInt(dado12.getTirada()[0])*Integer.parseInt(dado12.getTirada()[1]));
                     Intent intent = new Intent(v.getContext(), Turno1Activity.class);
                     intent.putExtra("partida", partida);
-                    startActivityForResult(intent, REQUEST_CODE);
+                    startActivityForResult(intent, 0);
                     finish();
                 }else{
                     AlertDialog.Builder builder = new AlertDialog.Builder( DiceActivity.this );
@@ -70,15 +74,7 @@ public class DiceActivity extends AppCompatActivity {
             }
         });
     }
-    public void onActivityResult(int requestCode, int resultCode, Intent data)
-    {
-        if ( requestCode == REQUEST_CODE
-                && resultCode == RESULT_OK )
-        {
-            // …
-        }
-    }
-
+    //---------------------------OPTIONS MENU--------------------------------
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         super.onCreateOptionsMenu(menu);

@@ -21,14 +21,15 @@ public class PlayersActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_players);
-
+        //-------------------------------WIDGETS AND TEXT FIELDS---------------
         final EditText etJugador1 = (EditText) this.findViewById(R.id.etJugador1);
         final EditText etJugador2 = (EditText) this.findViewById(R.id.etJugador2);
         final Button btStart = (Button) this.findViewById( R.id.btStart );
-
+        //------------------------------------------BUTTON LISTENER----------------------------
         btStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //---------------COMPRPOBACIÓN NOMBRES IGUALES Y CAMPOS VACÍOS-----------------
                 if(etJugador1.getText().toString().equals(etJugador2.getText().toString())){
                     AlertDialog.Builder builder = new AlertDialog.Builder( PlayersActivity.this );
                     builder.setTitle( PlayersActivity.this.getString(R.string.error) );
@@ -51,6 +52,8 @@ public class PlayersActivity extends AppCompatActivity {
         });
 
     }
+
+    //---------------------------OPTIONS MENU--------------------------------
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         super.onCreateOptionsMenu(menu);

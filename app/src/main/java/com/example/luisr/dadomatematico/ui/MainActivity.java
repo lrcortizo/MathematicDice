@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.activity_main);
-
+        //-------------------------------WIDGETS AND TEXT FIELDS---------------
         final Button btGame = (Button) this.findViewById( R.id.btGame );
         final Button btScore = (Button) this.findViewById( R.id.btScore );
         final Button btExit = (Button) this.findViewById( R.id.btExit );

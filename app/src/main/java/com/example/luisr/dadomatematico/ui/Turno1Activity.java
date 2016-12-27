@@ -24,16 +24,18 @@ public class Turno1Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_turno1);
+        //-------------------------------WIDGETS AND TEXT FIELDS------------------
         final Partida partida = (Partida)getIntent().getExtras().getSerializable("partida");
         final TextView tvObjetivo = (TextView) this.findViewById(R.id.tvObjetivo1);
         final TextView tvCifras = (TextView) this.findViewById(R.id.tvCifras1);
+        final EditText etExpresion = (EditText) this.findViewById(R.id.etExpresion1);
+        final Button btTurno = (Button) this.findViewById(R.id.btTurno);
+        final TextView tvTemporizador = (TextView) this.findViewById(R.id.tvTemporizador1);
         tvObjetivo.setText(this.getString(R.string.objetivo)+" "+partida.getObjetivo());
         tvCifras.setText(this.getString(R.string.numeros)+" "+partida.getDado6().getTirada()[0]+", "+partida.getDado6().getTirada()[1]+", "
                 +partida.getDado6().getTirada()[2]+", "+partida.getDado6().getTirada()[3]+", "
                 +partida.getDado6().getTirada()[4]+", "+partida.getDado6().getTirada()[5]);
-        final EditText etExpresion = (EditText) this.findViewById(R.id.etExpresion1);
-        final Button btTurno = (Button) this.findViewById(R.id.btTurno);
-        final TextView tvTemporizador = (TextView) this.findViewById(R.id.tvTemporizador1);
+        //-------------------------------------TEMPORIZADOR------------------------------------
         final CountDownTimer temporizador = new CountDownTimer(60000, 1000) {
             public void onTick(long millisUntilFinished) {
                 tvTemporizador.setText(Turno1Activity.this.getString(R.string.tiempo)+" " + millisUntilFinished / 1000);
@@ -50,12 +52,12 @@ public class Turno1Activity extends AppCompatActivity {
             }
         };
         temporizador.start();
-
+        //------------------------------------------BUTTON LISTENER--------------------
         btTurno.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String resultado = "";
-
+                //---------------COMPROBACION CAMPO VACÍO Y CARACTERES VÁLIDOS-----------------
                 if(etExpresion.getText().toString().isEmpty()){
                     AlertDialog.Builder builder = new AlertDialog.Builder( Turno1Activity.this );
                     builder.setTitle( Turno1Activity.this.getString(R.string.error) );
@@ -68,6 +70,7 @@ public class Turno1Activity extends AppCompatActivity {
                     builder.create().show();
                 }else{
                     try {
+                        //---------EVALUAR EXPRESION MATEMATICA----------------
                         resultado = calc(etExpresion.getText().toString(), partida);
                     }catch (Exception e){
                         AlertDialog.Builder builder = new AlertDialog.Builder( Turno1Activity.this );
@@ -100,7 +103,7 @@ public class Turno1Activity extends AppCompatActivity {
         super.onResume();
         label = true;
     }
-
+//-------------------------EVALUATE MATH EXPRESION----------------------
     public String calc(String expresion, Partida partida) throws Exception{
         Context rhino = Context.enter();
         rhino.setOptimizationLevel(-1);
@@ -110,6 +113,7 @@ public class Turno1Activity extends AppCompatActivity {
         boolean label3=false;
         boolean label4=false;
         boolean label5=false;
+        //----------------COMPROBACIÓN CARACTERES PERMITIDOS-----------------------------
         for(int i=1;i<expresion.length()+1;i++){
             if (!(expresion.substring((i-1),i).equals("+")) &&
                     !(expresion.substring((i-1),i).equals("*")) &&
@@ -157,7 +161,7 @@ public class Turno1Activity extends AppCompatActivity {
 
 
     }
-
+    //---------------------------------OPTIONS MENU-----------------------------------
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         super.onCreateOptionsMenu(menu);

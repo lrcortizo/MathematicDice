@@ -25,6 +25,7 @@ public class FinalActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_final);
+        //-------------------------------WIDGETS AND TEXT FIELDS------------------
         final Partida partida = (Partida)getIntent().getExtras().getSerializable("partida");
         final TextView tvObjetivo = (TextView) findViewById(R.id.tvObjetivo);
         final TextView tvResultado1 = (TextView) findViewById(R.id.tvResultado1);
@@ -34,6 +35,7 @@ public class FinalActivity extends AppCompatActivity {
         tvObjetivo.setText(this.getString(R.string.objetivo)+" "+partida.getObjetivo());
         tvResultado1.setText(this.getString(R.string.resultado)+" "+partida.getJugador1()+": "+partida.getResultado1());
         tvResultado2.setText(this.getString(R.string.resultado)+" "+partida.getJugador2()+": "+partida.getResultado2());
+        //-------------------------------MOSTRAR GANADOR---------------------
         if (partida.ganador() == "Empate") {
             tvGanador.setText(this.getString(R.string.empate)+" "+partida.getJugador1()+" "+this.getString(R.string.y)+" "+partida.getJugador2());
         }else if(partida.ganador() == partida.getJugador1()){
@@ -41,11 +43,13 @@ public class FinalActivity extends AppCompatActivity {
         }else{
             tvGanador.setText(partida.getJugador2()+" "+this.getString(R.string.ganar)+" "+partida.getJugador1());
         }
+        //------------------------------OBTENER FECHA Y HORA-----------------------
         Calendar calendar = new GregorianCalendar();
         StringBuilder sb = new StringBuilder();
         sb.append(calendar.get(Calendar.DAY_OF_MONTH) + "/" + (calendar.get(Calendar.MONTH)+1) + "/" + calendar.get(Calendar.YEAR));
         sb.append(" "+calendar.get(Calendar.HOUR_OF_DAY) + ":" + (calendar.get(Calendar.MINUTE)+1) + ":" + calendar.get(Calendar.SECOND));
         String fecha = sb.toString();
+        //-----------------------------ACTUALIZAR BASE DE DATOS----------------------------
         Queue<String> cola = new LinkedList<>();
         SQLite sqlDb = new SQLite(this.getApplicationContext());
         SQLiteDatabase db = sqlDb.getReadableDatabase();
@@ -64,6 +68,7 @@ public class FinalActivity extends AppCompatActivity {
         db = sqlDb.getWritableDatabase();
         db.execSQL( "INSERT OR IGNORE INTO historial(fecha, resultado) VALUES( ?, ? )",
                 new String[]{ fecha, partida.ganador() } );
+        //------------------------------------------BUTTON LISTENER-----------------------------
         btFin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
