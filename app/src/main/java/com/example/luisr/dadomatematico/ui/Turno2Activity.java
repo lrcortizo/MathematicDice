@@ -50,31 +50,14 @@ public class Turno2Activity extends AppCompatActivity {
         btTerminar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                boolean label = true;
                 String resultado2 = "";
-                for(int i=1;i<etExpresion.getText().toString().length()+1;i++){
-                    if (!(etExpresion.getText().toString().substring((i-1),i).equals("+")) &&
-                        !(etExpresion.getText().toString().substring((i-1),i).equals("*")) &&
-                        !(etExpresion.getText().toString().substring((i-1),i).equals("-")) &&
-                        !(etExpresion.getText().toString().substring((i-1),i).equals("/")) &&
-                        !(etExpresion.getText().toString().substring((i-1),i).equals("(")) &&
-                        !(etExpresion.getText().toString().substring((i-1),i).equals(")")) &&
-                        !(etExpresion.getText().toString().substring((i-1),i).equals(partida.getDado6().getTirada()[0])) &&
-                        !(etExpresion.getText().toString().substring((i-1),i).equals(partida.getDado6().getTirada()[1])) &&
-                        !(etExpresion.getText().toString().substring((i-1),i).equals(partida.getDado6().getTirada()[2])) &&
-                        !(etExpresion.getText().toString().substring((i-1),i).equals(partida.getDado6().getTirada()[3])) &&
-                        !(etExpresion.getText().toString().substring((i-1),i).equals(partida.getDado6().getTirada()[4])) &&
-                        !(etExpresion.getText().toString().substring((i-1),i).equals(partida.getDado6().getTirada()[5])))
-                    {
-                        label=false;
-                    }
-                }
+
                 if(etExpresion.getText().toString().isEmpty()){
                     AlertDialog.Builder builder = new AlertDialog.Builder( Turno2Activity.this );
                     builder.setTitle( Turno2Activity.this.getString(R.string.error) );
                     builder.setMessage( Turno2Activity.this.getString(R.string.errorturno1) );
                     builder.create().show();
-                }else if(!label || etExpresion.getText().toString().length()==1){
+                }else if(etExpresion.getText().toString().length()==1){
                     AlertDialog.Builder builder = new AlertDialog.Builder( Turno2Activity.this );
                     builder.setTitle( Turno2Activity.this.getString(R.string.error) );
                     builder.setMessage( Turno2Activity.this.getString(R.string.errorturno2) );
@@ -101,9 +84,13 @@ public class Turno2Activity extends AppCompatActivity {
     }
 
     public String calc(String expresion, Partida partida) throws Exception{
-
         Context rhino = Context.enter();
-
+        boolean label0=false;
+        boolean label1=false;
+        boolean label2=false;
+        boolean label3=false;
+        boolean label4=false;
+        boolean label5=false;
         rhino.setOptimizationLevel(-1);
         for(int i=1;i<expresion.length()+1;i++){
             if (!(expresion.substring((i-1),i).equals("+")) &&
@@ -120,13 +107,32 @@ public class Turno2Activity extends AppCompatActivity {
                     !(expresion.substring((i-1),i).equals(partida.getDado6().getTirada()[5])))
             {
                 throw new Exception(this.getString(R.string.errorturno3));
+            }else if(expresion.substring((i-1),i).equals(partida.getDado6().getTirada()[0]) && label0==false){
+                label0=true;
+            } else if(expresion.substring((i-1),i).equals(partida.getDado6().getTirada()[1]) && label1==false){
+                label1=true;
+            } else if(expresion.substring((i-1),i).equals(partida.getDado6().getTirada()[2]) && label2==false){
+                label2=true;
+            } else if(expresion.substring((i-1),i).equals(partida.getDado6().getTirada()[3]) && label3==false){
+                label3=true;
+            } else if(expresion.substring((i-1),i).equals(partida.getDado6().getTirada()[4]) && label4==false){
+                label4=true;
+            } else if(expresion.substring((i-1),i).equals(partida.getDado6().getTirada()[5]) && label5==false){
+                label5=true;
+            } else if(!(expresion.substring((i-1),i).equals("+")) &&
+                    !(expresion.substring((i-1),i).equals("*")) &&
+                    !(expresion.substring((i-1),i).equals("-")) &&
+                    !(expresion.substring((i-1),i).equals("/")) &&
+                    !(expresion.substring((i-1),i).equals("(")) &&
+                    !(expresion.substring((i-1),i).equals(")"))){
+                throw new Exception(this.getString(R.string.errorturno3));
             }
         }
-            Scriptable scope = rhino.initStandardObjects();
+        Scriptable scope = rhino.initStandardObjects();
 
-            String toRet = rhino.evaluateString(scope, expresion, "JavaScript", 1, null).toString();
+        String toRet = rhino.evaluateString(scope, expresion, "JavaScript", 1, null).toString();
 
-            return toRet;
+        return toRet;
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu){

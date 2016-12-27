@@ -87,7 +87,13 @@ public class Turno1Activity extends AppCompatActivity {
 
     public String calc(String expresion, Partida partida) throws Exception{
         Context rhino = Context.enter();
-        rhino.setOptimizationLevel(-1);;
+        rhino.setOptimizationLevel(-1);
+        boolean label0=false;
+        boolean label1=false;
+        boolean label2=false;
+        boolean label3=false;
+        boolean label4=false;
+        boolean label5=false;
         for(int i=1;i<expresion.length()+1;i++){
             if (!(expresion.substring((i-1),i).equals("+")) &&
                     !(expresion.substring((i-1),i).equals("*")) &&
@@ -103,15 +109,35 @@ public class Turno1Activity extends AppCompatActivity {
                     !(expresion.substring((i-1),i).equals(partida.getDado6().getTirada()[5])))
             {
                     throw new Exception(this.getString(R.string.errorturno3));
+
+            } else if(expresion.substring((i-1),i).equals(partida.getDado6().getTirada()[0]) && label0==false){
+                label0=true;
+            } else if(expresion.substring((i-1),i).equals(partida.getDado6().getTirada()[1]) && label1==false){
+                label1=true;
+            } else if(expresion.substring((i-1),i).equals(partida.getDado6().getTirada()[2]) && label2==false){
+                label2=true;
+            } else if(expresion.substring((i-1),i).equals(partida.getDado6().getTirada()[3]) && label3==false){
+                label3=true;
+            } else if(expresion.substring((i-1),i).equals(partida.getDado6().getTirada()[4]) && label4==false){
+                label4=true;
+            } else if(expresion.substring((i-1),i).equals(partida.getDado6().getTirada()[5]) && label5==false){
+                label5=true;
+            } else if(!(expresion.substring((i-1),i).equals("+")) &&
+                    !(expresion.substring((i-1),i).equals("*")) &&
+                    !(expresion.substring((i-1),i).equals("-")) &&
+                    !(expresion.substring((i-1),i).equals("/")) &&
+                    !(expresion.substring((i-1),i).equals("(")) &&
+                    !(expresion.substring((i-1),i).equals(")"))){
+                throw new Exception(this.getString(R.string.errorturno3));
             }
         }
 
-            Scriptable scope = rhino.initStandardObjects();
+        Scriptable scope = rhino.initStandardObjects();
 
 
-            String toRet = rhino.evaluateString(scope, expresion, "JavaScript", 1, null).toString();
+        String toRet = rhino.evaluateString(scope, expresion, "JavaScript", 1, null).toString();
 
-            return toRet;
+        return toRet;
 
 
     }
