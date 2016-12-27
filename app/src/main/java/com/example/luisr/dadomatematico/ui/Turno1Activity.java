@@ -18,6 +18,7 @@ import com.example.luisr.dadomatematico.core.Partida;
 import org.mozilla.javascript.*;
 
 public class Turno1Activity extends AppCompatActivity {
+    private boolean label = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,17 +35,18 @@ public class Turno1Activity extends AppCompatActivity {
         final Button btTurno = (Button) this.findViewById(R.id.btTurno);
         final TextView tvTemporizador = (TextView) this.findViewById(R.id.tvTemporizador1);
         final CountDownTimer temporizador = new CountDownTimer(60000, 1000) {
-
             public void onTick(long millisUntilFinished) {
                 tvTemporizador.setText(Turno1Activity.this.getString(R.string.tiempo)+" " + millisUntilFinished / 1000);
             }
 
             public void onFinish() {
-                partida.setResultado1(null);
-                Intent intent = new Intent(Turno1Activity.this, Turno2Activity.class);
-                intent.putExtra("partida", partida);
-                startActivityForResult(intent, 0);
-                finish();
+                if(label==true) {
+                    partida.setResultado1(null);
+                    Intent intent = new Intent(Turno1Activity.this, Turno2Activity.class);
+                    intent.putExtra("partida", partida);
+                    startActivityForResult(intent, 0);
+                    finish();
+                }
             }
         };
         temporizador.start();
@@ -85,6 +87,18 @@ public class Turno1Activity extends AppCompatActivity {
             }
 
         });
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        label = false;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        label = true;
     }
 
     public String calc(String expresion, Partida partida) throws Exception{

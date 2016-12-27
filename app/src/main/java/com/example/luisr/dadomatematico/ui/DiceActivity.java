@@ -20,7 +20,7 @@ import com.example.luisr.dadomatematico.core.Partida;
 public class DiceActivity extends AppCompatActivity {
     private boolean label6 = false;
     private boolean label12 = false;
-
+    private final int REQUEST_CODE = 1;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dice);
@@ -58,7 +58,7 @@ public class DiceActivity extends AppCompatActivity {
                     partida.setDados(dado6, Integer.parseInt(dado12.getTirada()[0])*Integer.parseInt(dado12.getTirada()[1]));
                     Intent intent = new Intent(v.getContext(), Turno1Activity.class);
                     intent.putExtra("partida", partida);
-                    startActivityForResult(intent, 0);
+                    startActivityForResult(intent, REQUEST_CODE);
                     finish();
                 }else{
                     AlertDialog.Builder builder = new AlertDialog.Builder( DiceActivity.this );
@@ -70,7 +70,14 @@ public class DiceActivity extends AppCompatActivity {
             }
         });
     }
-
+    public void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        if ( requestCode == REQUEST_CODE
+                && resultCode == RESULT_OK )
+        {
+            // …
+        }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu){

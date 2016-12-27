@@ -18,6 +18,8 @@ import com.example.luisr.dadomatematico.core.Partida;
 import org.mozilla.javascript.*;
 
 public class Turno2Activity extends AppCompatActivity {
+    private boolean label = true;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,11 +41,13 @@ public class Turno2Activity extends AppCompatActivity {
             }
 
             public void onFinish() {
-                partida.setResultado1(null);
-                Intent intent = new Intent(Turno2Activity.this, Turno2Activity.class);
-                intent.putExtra("partida", partida);
-                startActivityForResult(intent, 0);
-                finish();
+                if(label==true) {
+                    partida.setResultado1(null);
+                    Intent intent = new Intent(Turno2Activity.this, Turno2Activity.class);
+                    intent.putExtra("partida", partida);
+                    startActivityForResult(intent, 0);
+                    finish();
+                }
             }
         };
         temporizador.start();
@@ -83,6 +87,17 @@ public class Turno2Activity extends AppCompatActivity {
                 }
             }
         });
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        label = false;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        label = true;
     }
 
     public String calc(String expresion, Partida partida) throws Exception{
