@@ -21,7 +21,8 @@
         <activity android:name=".ui.Turno1Activity" />
         <activity android:name=".ui.Turno2Activity" />
         <activity android:name=".ui.FinalActivity" />
-        <activity android:name=".ui.LanguageActivity"></activity>
+        <activity android:name=".ui.LanguageActivity" />
+        <activity android:name=".ui.InstructionsActivity"></activity>
     </application>
 
 </manifest>

@@ -43,4 +43,6 @@
     <string name="errorplayers2">Escribe os nomes dos xogadores antes de continuar</string>
     <string name="errorplayers1">Nomes de xogadores iguais</string>
     <string name="errordice">Lanza os dados antes de comezar</string>
+    <string name="btInstructions">Instruccións</string>
+    <string name="instrucciones">aqui van as instruccions</string>
 </resources>

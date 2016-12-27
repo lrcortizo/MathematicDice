@@ -66,6 +66,19 @@
             android:layout_height="wrap_content">
 
             <Button
+                android:text="@string/btInstructions"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btInstructions"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
                 android:text="@string/btExit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

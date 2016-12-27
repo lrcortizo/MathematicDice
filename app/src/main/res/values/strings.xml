@@ -43,4 +43,6 @@
     <string name="empate">Empate entre</string>
     <string name="y">y</string>
     <string name="ganar">gana a</string>
+    <string name="btInstructions">Instrucciones</string>
+    <string name="instrucciones">aqui van las instrucciones</string>
 </resources>
