@@ -21,7 +21,7 @@ public class PlayersActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_players);
-        //-------------------------------WIDGETS AND TEXT FIELDS---------------
+        //-------------------------------WIDGETS AND TEXT FIELDS-------------------
         final EditText etJugador1 = (EditText) this.findViewById(R.id.etJugador1);
         final EditText etJugador2 = (EditText) this.findViewById(R.id.etJugador2);
         final Button btStart = (Button) this.findViewById( R.id.btStart );

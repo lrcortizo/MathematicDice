@@ -8,8 +8,6 @@ import android.widget.Button;
 
 import com.example.luisr.dadomatematico.R;
 
-import static com.example.luisr.dadomatematico.R.id.btLanguage;
-
 public class MainActivity extends AppCompatActivity {
 
     @Override
