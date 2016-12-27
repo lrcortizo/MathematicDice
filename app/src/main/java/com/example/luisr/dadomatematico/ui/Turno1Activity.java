@@ -33,7 +33,7 @@ public class Turno1Activity extends AppCompatActivity {
         final EditText etExpresion = (EditText) this.findViewById(R.id.etExpresion1);
         final Button btTurno = (Button) this.findViewById(R.id.btTurno);
         final TextView tvTemporizador = (TextView) this.findViewById(R.id.tvTemporizador1);
-        new CountDownTimer(60000, 1000) {
+        final CountDownTimer temporizador = new CountDownTimer(60000, 1000) {
 
             public void onTick(long millisUntilFinished) {
                 tvTemporizador.setText(Turno1Activity.this.getString(R.string.tiempo)+" " + millisUntilFinished / 1000);
@@ -46,7 +46,8 @@ public class Turno1Activity extends AppCompatActivity {
                 startActivityForResult(intent, 0);
                 finish();
             }
-        }.start();
+        };
+        temporizador.start();
 
         btTurno.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,6 +79,7 @@ public class Turno1Activity extends AppCompatActivity {
                         intent.putExtra("partida", partida);
                         startActivityForResult(intent, 0);
                         finish();
+                        temporizador.cancel();
                     }
                 }
             }
