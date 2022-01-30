@@ -1,9 +1,8 @@
-package com.example.luisr.dadomatematico.ui;
+package com.lrcortizo.android.mathematicdice.ui;
 
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.CountDownTimer;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -12,12 +11,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.example.luisr.dadomatematico.R;
-import com.example.luisr.dadomatematico.core.Partida;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.lrcortizo.android.mathematic.dice.R;
+import com.lrcortizo.android.mathematicdice.core.Game;
 
 import org.mozilla.javascript.*;
 
-public class Turno2Activity extends AppCompatActivity {
+public class Turn2Activity extends AppCompatActivity {
     private boolean label = true;
 
     @Override
@@ -25,28 +26,28 @@ public class Turno2Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_turno2);
         //-------------------------------WIDGETS AND TEXT FIELDS---------------
-        final Partida partida = (Partida)getIntent().getExtras().getSerializable("partida");
+        final Game game = (Game)getIntent().getExtras().getSerializable("partida");
         final TextView tvObjetivo = (TextView) this.findViewById(R.id.tvObjetivo2);
         final TextView tvCifras = (TextView) this.findViewById(R.id.tvCifras2);
         final EditText etExpresion = (EditText) this.findViewById(R.id.etExpresion2);
         final Button btTerminar = (Button) this.findViewById(R.id.btTerminar);
         final TextView tvTemporizador = (TextView) this.findViewById(R.id.tvTemporizador2);
-        tvObjetivo.setText(this.getString(R.string.objetivo)+" "+partida.getObjetivo());
-        tvCifras.setText(this.getString(R.string.numeros)+" "+partida.getDado6().getTirada()[0]+", "+partida.getDado6().getTirada()[1]+", "
-                +partida.getDado6().getTirada()[2]+", "+partida.getDado6().getTirada()[3]+", "
-                +partida.getDado6().getTirada()[4]+", "+partida.getDado6().getTirada()[5]);
+        tvObjetivo.setText(this.getString(R.string.objetivo)+" "+ game.getObjetivo());
+        tvCifras.setText(this.getString(R.string.numeros)+" "+ game.getDado6().getTirada()[0]+", "+ game.getDado6().getTirada()[1]+", "
+                + game.getDado6().getTirada()[2]+", "+ game.getDado6().getTirada()[3]+", "
+                + game.getDado6().getTirada()[4]+", "+ game.getDado6().getTirada()[5]);
         //-------------------------------------TEMPORIZADOR------------------------------------
         final CountDownTimer temporizador = new CountDownTimer(60000, 1000) {
 
             public void onTick(long millisUntilFinished) {
-                tvTemporizador.setText(Turno2Activity.this.getString(R.string.tiempo)+" " + millisUntilFinished / 1000);
+                tvTemporizador.setText(Turn2Activity.this.getString(R.string.tiempo)+" " + millisUntilFinished / 1000);
             }
 
             public void onFinish() {
                 if(label==true) {
-                    partida.setResultado1(null);
-                    Intent intent = new Intent(Turno2Activity.this, Turno2Activity.class);
-                    intent.putExtra("partida", partida);
+                    game.setResultado1(null);
+                    Intent intent = new Intent(Turn2Activity.this, Turn2Activity.class);
+                    intent.putExtra("partida", game);
                     startActivityForResult(intent, 0);
                     finish();
                 }
@@ -60,29 +61,29 @@ public class Turno2Activity extends AppCompatActivity {
             String resultado2 = "";
             //---------------COMPROBACION CAMPO VACÍO Y CARACTERES VÁLIDOS-----------------
             if(etExpresion.getText().toString().isEmpty()){
-                AlertDialog.Builder builder = new AlertDialog.Builder( Turno2Activity.this );
-                builder.setTitle( Turno2Activity.this.getString(R.string.error) );
-                builder.setMessage( Turno2Activity.this.getString(R.string.errorturno1) );
+                AlertDialog.Builder builder = new AlertDialog.Builder( Turn2Activity.this );
+                builder.setTitle( Turn2Activity.this.getString(R.string.error) );
+                builder.setMessage( Turn2Activity.this.getString(R.string.errorturno1) );
                 builder.create().show();
             }else if(etExpresion.getText().toString().length()==1){
-                AlertDialog.Builder builder = new AlertDialog.Builder( Turno2Activity.this );
-                builder.setTitle( Turno2Activity.this.getString(R.string.error) );
-                builder.setMessage( Turno2Activity.this.getString(R.string.errorturno2) );
+                AlertDialog.Builder builder = new AlertDialog.Builder( Turn2Activity.this );
+                builder.setTitle( Turn2Activity.this.getString(R.string.error) );
+                builder.setMessage( Turn2Activity.this.getString(R.string.errorturno2) );
                 builder.create().show();
             }else{
                 try {
                     //---------EVALUAR EXPRESION MATEMATICA----------------
-                    resultado2 = calc(etExpresion.getText().toString(), partida);
+                    resultado2 = calc(etExpresion.getText().toString(), game);
                 }catch (Exception e){
-                    AlertDialog.Builder builder = new AlertDialog.Builder( Turno2Activity.this );
-                    builder.setTitle( Turno2Activity.this.getString(R.string.error) );
+                    AlertDialog.Builder builder = new AlertDialog.Builder( Turn2Activity.this );
+                    builder.setTitle( Turn2Activity.this.getString(R.string.error) );
                     builder.setMessage( e.getMessage());
                     builder.create().show();
                 }
                 if(!resultado2.equals("")) {
-                    partida.setResultado2(resultado2);
+                    game.setResultado2(resultado2);
                     Intent intent = new Intent(v.getContext(), FinalActivity.class);
-                    intent.putExtra("partida", partida);
+                    intent.putExtra("partida", game);
                     startActivityForResult(intent, 0);
                     finish();
                     temporizador.cancel();
@@ -103,7 +104,7 @@ public class Turno2Activity extends AppCompatActivity {
         label = true;
     }
     //-------------------------EVALUATE MATH EXPRESION----------------------
-    public String calc(String expresion, Partida partida) throws Exception{
+    public String calc(String expresion, Game game) throws Exception{
         Context rhino = Context.enter();
         boolean label0=false;
         boolean label1=false;
@@ -120,25 +121,25 @@ public class Turno2Activity extends AppCompatActivity {
                     !(expresion.substring((i-1),i).equals("/")) &&
                     !(expresion.substring((i-1),i).equals("(")) &&
                     !(expresion.substring((i-1),i).equals(")")) &&
-                    !(expresion.substring((i-1),i).equals(partida.getDado6().getTirada()[0])) &&
-                    !(expresion.substring((i-1),i).equals(partida.getDado6().getTirada()[1])) &&
-                    !(expresion.substring((i-1),i).equals(partida.getDado6().getTirada()[2])) &&
-                    !(expresion.substring((i-1),i).equals(partida.getDado6().getTirada()[3])) &&
-                    !(expresion.substring((i-1),i).equals(partida.getDado6().getTirada()[4])) &&
-                    !(expresion.substring((i-1),i).equals(partida.getDado6().getTirada()[5])))
+                    !(expresion.substring((i-1),i).equals(game.getDado6().getTirada()[0])) &&
+                    !(expresion.substring((i-1),i).equals(game.getDado6().getTirada()[1])) &&
+                    !(expresion.substring((i-1),i).equals(game.getDado6().getTirada()[2])) &&
+                    !(expresion.substring((i-1),i).equals(game.getDado6().getTirada()[3])) &&
+                    !(expresion.substring((i-1),i).equals(game.getDado6().getTirada()[4])) &&
+                    !(expresion.substring((i-1),i).equals(game.getDado6().getTirada()[5])))
             {
                 throw new Exception(this.getString(R.string.errorturno3));
-            }else if(expresion.substring((i-1),i).equals(partida.getDado6().getTirada()[0]) && label0==false){
+            }else if(expresion.substring((i-1),i).equals(game.getDado6().getTirada()[0]) && label0==false){
                 label0=true;
-            } else if(expresion.substring((i-1),i).equals(partida.getDado6().getTirada()[1]) && label1==false){
+            } else if(expresion.substring((i-1),i).equals(game.getDado6().getTirada()[1]) && label1==false){
                 label1=true;
-            } else if(expresion.substring((i-1),i).equals(partida.getDado6().getTirada()[2]) && label2==false){
+            } else if(expresion.substring((i-1),i).equals(game.getDado6().getTirada()[2]) && label2==false){
                 label2=true;
-            } else if(expresion.substring((i-1),i).equals(partida.getDado6().getTirada()[3]) && label3==false){
+            } else if(expresion.substring((i-1),i).equals(game.getDado6().getTirada()[3]) && label3==false){
                 label3=true;
-            } else if(expresion.substring((i-1),i).equals(partida.getDado6().getTirada()[4]) && label4==false){
+            } else if(expresion.substring((i-1),i).equals(game.getDado6().getTirada()[4]) && label4==false){
                 label4=true;
-            } else if(expresion.substring((i-1),i).equals(partida.getDado6().getTirada()[5]) && label5==false){
+            } else if(expresion.substring((i-1),i).equals(game.getDado6().getTirada()[5]) && label5==false){
                 label5=true;
             } else if(!(expresion.substring((i-1),i).equals("+")) &&
                     !(expresion.substring((i-1),i).equals("*")) &&

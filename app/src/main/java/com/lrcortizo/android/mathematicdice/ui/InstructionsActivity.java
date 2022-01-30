@@ -1,10 +1,11 @@
-package com.example.luisr.dadomatematico.ui;
+package com.lrcortizo.android.mathematicdice.ui;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
-import com.example.luisr.dadomatematico.R;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.lrcortizo.android.mathematic.dice.R;
 
 public class InstructionsActivity extends AppCompatActivity {
 

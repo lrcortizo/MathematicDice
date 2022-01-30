@@ -1,12 +1,13 @@
-package com.example.luisr.dadomatematico.ui;
+package com.lrcortizo.android.mathematicdice.ui;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.luisr.dadomatematico.R;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.lrcortizo.android.mathematic.dice.R;
 
 public class MainActivity extends AppCompatActivity {
 

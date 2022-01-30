@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.luisr.dadomatematico">
+    package="com.lrcortizo.android.mathematicdice">
 
     <application
         android:allowBackup="true"
@@ -18,11 +18,11 @@
         <activity android:name=".ui.HistoryActivity" />
         <activity android:name=".ui.PlayersActivity" />
         <activity android:name=".ui.DiceActivity" />
-        <activity android:name=".ui.Turno1Activity" />
-        <activity android:name=".ui.Turno2Activity" />
+        <activity android:name=".ui.Turn1Activity" />
+        <activity android:name=".ui.Turn2Activity" />
         <activity android:name=".ui.FinalActivity" />
         <activity android:name=".ui.LanguageActivity" />
-        <activity android:name=".ui.InstructionsActivity"></activity>
+        <activity android:name=".ui.InstructionsActivity" />
     </application>
 
 </manifest>

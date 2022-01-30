@@ -1,9 +1,8 @@
-package com.example.luisr.dadomatematico.ui;
+package com.lrcortizo.android.mathematicdice.ui;
 
 
 import android.app.AlertDialog;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -11,11 +10,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import java.lang.*;
 
-import com.example.luisr.dadomatematico.R;
-import com.example.luisr.dadomatematico.core.Dado;
-import com.example.luisr.dadomatematico.core.Partida;
+import com.lrcortizo.android.mathematic.dice.R;
+import com.lrcortizo.android.mathematicdice.core.Dice;
+import com.lrcortizo.android.mathematicdice.core.Game;
 
 public class DiceActivity extends AppCompatActivity {
     private boolean label6 = false;
@@ -25,7 +26,7 @@ public class DiceActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dice);
         //-------------------------------WIDGETS AND TEXT FIELDS------------------
-        final Partida partida = (Partida)getIntent().getExtras().getSerializable("partida");
+        final Game game = (Game)getIntent().getExtras().getSerializable("partida");
         final Button btPlay =(Button) this.findViewById(R.id.btPlay);
         final Button bt6 = (Button) this.findViewById( R.id.button6 );
         final Button bt12 = (Button) this.findViewById( R.id.button12 );
@@ -33,24 +34,24 @@ public class DiceActivity extends AppCompatActivity {
         final TextView tvDados12 = (TextView) this.findViewById(R.id.tvDados12);
         final TextView tvDice = (TextView) this.findViewById(R.id.tvDice);
         //------------------------------LANZAR DADOS--------------------------
-        final Dado dado6 = new Dado(6);
-        final Dado dado12 = new Dado(12);
-        dado6.lanzarDado();
-        dado12.lanzarDado();
+        final Dice dice6 = new Dice(6);
+        final Dice dice12 = new Dice(12);
+        dice6.lanzarDado();
+        dice12.lanzarDado();
         //------------------------------------------BUTTON LISTENERS-----------------------------
         bt6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                tvDados6.setText(DiceActivity.this.getString(R.string.dado6)+" "+dado6.getTirada()[0]+", "+dado6.getTirada()[1]+", "
-                        +dado6.getTirada()[2]+", "+dado6.getTirada()[3]+", "+dado6.getTirada()[4]+", "+dado6.getTirada()[5]);
+                tvDados6.setText(DiceActivity.this.getString(R.string.dice6)+" "+ dice6.getTirada()[0]+", "+ dice6.getTirada()[1]+", "
+                        + dice6.getTirada()[2]+", "+ dice6.getTirada()[3]+", "+ dice6.getTirada()[4]+", "+ dice6.getTirada()[5]);
                 label6=true;
             }
         });
         bt12.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                tvDados12.setText(DiceActivity.this.getString(R.string.dado12)+" "+dado12.getTirada()[0]+", "+dado12.getTirada()[1]);
-                tvDice.setText(DiceActivity.this.getString(R.string.objetivo)+" "+(Integer.parseInt(dado12.getTirada()[0])*Integer.parseInt(dado12.getTirada()[1])));
+                tvDados12.setText(DiceActivity.this.getString(R.string.dice12)+" "+ dice12.getTirada()[0]+", "+ dice12.getTirada()[1]);
+                tvDice.setText(DiceActivity.this.getString(R.string.objetivo)+" "+(Integer.parseInt(dice12.getTirada()[0])*Integer.parseInt(dice12.getTirada()[1])));
                 label12=true;
             }
         });
@@ -59,9 +60,9 @@ public class DiceActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //-----------COMPROBACION DADOS LANZADOS---------------
                 if(label6 && label12) {
-                    partida.setDados(dado6, Integer.parseInt(dado12.getTirada()[0])*Integer.parseInt(dado12.getTirada()[1]));
-                    Intent intent = new Intent(v.getContext(), Turno1Activity.class);
-                    intent.putExtra("partida", partida);
+                    game.setDados(dice6, Integer.parseInt(dice12.getTirada()[0])*Integer.parseInt(dice12.getTirada()[1]));
+                    Intent intent = new Intent(v.getContext(), Turn1Activity.class);
+                    intent.putExtra("partida", game);
                     startActivityForResult(intent, 0);
                     finish();
                 }else{

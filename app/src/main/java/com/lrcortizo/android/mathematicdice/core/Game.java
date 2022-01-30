@@ -1,26 +1,22 @@
-package com.example.luisr.dadomatematico.core;
+package com.lrcortizo.android.mathematicdice.core;
 
 import java.io.Serializable;
 
-/**
- * Created by luisr on 10/12/2016.
- */
-@SuppressWarnings("serial")
-public class Partida implements Serializable {
-    private Dado dado6;
+public class Game implements Serializable {
+    private Dice dice6;
     private int objetivo;
     private String jugador1;
     private String jugador2;
     private String resultado1;
     private String resultado2;
 
-    public Partida(String j1, String j2){
+    public Game(String j1, String j2){
         jugador1 = j1;
         jugador2 = j2;
     }
 
-    public void setDados(Dado d, int ob){
-        dado6 = d;
+    public void setDados(Dice d, int ob){
+        dice6 = d;
         objetivo = ob;
     }
 
@@ -84,8 +80,8 @@ public class Partida implements Serializable {
         return resultado2;
     }
 
-    public Dado getDado6() {
-        return dado6;
+    public Dice getDado6() {
+        return dice6;
     }
 
     public int getObjetivo() {

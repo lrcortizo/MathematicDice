@@ -1,16 +1,12 @@
-package com.example.luisr.dadomatematico.core;
+package com.lrcortizo.android.mathematicdice.core;
+
 import java.io.Serializable;
-import java.math.*;
 
-/**
- * Created by luisr on 08/11/2016.
- */
-
-public class Dado implements Serializable{
+public class Dice implements Serializable {
     private int numCaras;
     private String [] tirada;
 
-    public Dado(int n){
+    public Dice(int n){
         numCaras=n;
         tirada = new String[n];
     }

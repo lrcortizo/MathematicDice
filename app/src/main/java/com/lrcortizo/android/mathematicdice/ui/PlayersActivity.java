@@ -1,8 +1,7 @@
-package com.example.luisr.dadomatematico.ui;
+package com.lrcortizo.android.mathematicdice.ui;
 
 import android.app.AlertDialog;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -11,12 +10,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.example.luisr.dadomatematico.R;
-import com.example.luisr.dadomatematico.core.Partida;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.lrcortizo.android.mathematic.dice.R;
+import com.lrcortizo.android.mathematicdice.core.Game;
 
 
 public class PlayersActivity extends AppCompatActivity {
-    private Partida partida;
+    private Game game;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,9 +38,9 @@ public class PlayersActivity extends AppCompatActivity {
                     builder.create().show();
                 } else if (!etJugador1.getText().toString().isEmpty() && !etJugador2.getText().toString().isEmpty()
                                 && !(etJugador1.getText().toString().equals(etJugador2.getText().toString()))) {
-                    partida = new Partida(etJugador1.getText().toString(), etJugador2.getText().toString());
+                    game = new Game(etJugador1.getText().toString(), etJugador2.getText().toString());
                     Intent intent = new Intent(v.getContext(), DiceActivity.class);
-                    intent.putExtra("partida", partida);
+                    intent.putExtra("partida", game);
                     startActivityForResult(intent, 0);
                     finish();
                 }else{

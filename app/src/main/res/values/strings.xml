@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">DadoMatematico</string>
+    <string name="app_name" translatable="false">Mathematic dice</string>
     <string name="btGame">Jugar</string>
     <string name="btScore">Puntuaciones</string>
     <string name="btExit">Salir</string>
@@ -30,8 +30,8 @@
     <string name="errorplayers2">Escribe los nombres de los jugadores antes de continuar</string>
     <string name="helpdados">Pulsa los botones para lanzar los dados</string>
     <string name="errordice">Lanza los dados antes de continuar</string>
-    <string name="dado6">Reultado del lanzamiento de los dados de 6 caras:</string>
-    <string name="dado12">Reultado del lanzamiento de los dados de 12 caras:</string>
+    <string name="dice6">Reultado del lanzamiento de los dados de 6 caras:</string>
+    <string name="dice12">Reultado del lanzamiento de los dados de 12 caras:</string>
     <string name="objetivo">La cifra objetivo es:</string>
     <string name="helpturno">Escribe una expresión matematica para llegar al objetivo</string>
     <string name="numeros">Los numeros a utilizar son:</string>
