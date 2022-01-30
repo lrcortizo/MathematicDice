@@ -12,12 +12,13 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.lrcortizo.android.mathematic.dice.R;
+import com.lrcortizo.android.mathematicdice.R;
 import com.lrcortizo.android.mathematicdice.core.Game;
 
 
 public class PlayersActivity extends AppCompatActivity {
     private Game game;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,28 +26,28 @@ public class PlayersActivity extends AppCompatActivity {
         //-------------------------------WIDGETS AND TEXT FIELDS-------------------
         final EditText etJugador1 = (EditText) this.findViewById(R.id.etJugador1);
         final EditText etJugador2 = (EditText) this.findViewById(R.id.etJugador2);
-        final Button btStart = (Button) this.findViewById( R.id.btStart );
+        final Button btStart = (Button) this.findViewById(R.id.btStart);
         //------------------------------------------BUTTON LISTENER----------------------------
         btStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //---------------COMPRPOBACIÓN NOMBRES IGUALES Y CAMPOS VACÍOS-----------------
-                if(etJugador1.getText().toString().equals(etJugador2.getText().toString())){
-                    AlertDialog.Builder builder = new AlertDialog.Builder( PlayersActivity.this );
-                    builder.setTitle( PlayersActivity.this.getString(R.string.error) );
+                if (etJugador1.getText().toString().equals(etJugador2.getText().toString())) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(PlayersActivity.this);
+                    builder.setTitle(PlayersActivity.this.getString(R.string.error));
                     builder.setMessage(PlayersActivity.this.getString(R.string.errorplayers1));
                     builder.create().show();
                 } else if (!etJugador1.getText().toString().isEmpty() && !etJugador2.getText().toString().isEmpty()
-                                && !(etJugador1.getText().toString().equals(etJugador2.getText().toString()))) {
+                        && !(etJugador1.getText().toString().equals(etJugador2.getText().toString()))) {
                     game = new Game(etJugador1.getText().toString(), etJugador2.getText().toString());
                     Intent intent = new Intent(v.getContext(), DiceActivity.class);
-                    intent.putExtra("partida", game);
+                    intent.putExtra("game", game);
                     startActivityForResult(intent, 0);
                     finish();
-                }else{
-                    AlertDialog.Builder builder = new AlertDialog.Builder( PlayersActivity.this );
-                    builder.setTitle( PlayersActivity.this.getString(R.string.error) );
-                    builder.setMessage( PlayersActivity.this.getString(R.string.errorplayers2) );
+                } else {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(PlayersActivity.this);
+                    builder.setTitle(PlayersActivity.this.getString(R.string.error));
+                    builder.setMessage(PlayersActivity.this.getString(R.string.errorplayers2));
                     builder.create().show();
                 }
             }
@@ -56,16 +57,16 @@ public class PlayersActivity extends AppCompatActivity {
 
     //---------------------------OPTIONS MENU--------------------------------
     @Override
-    public boolean onCreateOptionsMenu(Menu menu){
+    public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
         this.getMenuInflater().inflate(R.menu.game_menu, menu);
         return true;
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem menuItem){
+    public boolean onOptionsItemSelected(MenuItem menuItem) {
         boolean toret = false;
-        switch (menuItem.getItemId()){
+        switch (menuItem.getItemId()) {
             case R.id.opHelp:
                 help();
                 toret = true;
@@ -80,9 +81,9 @@ public class PlayersActivity extends AppCompatActivity {
         return toret;
     }
 
-    public void help(){
+    public void help() {
         final TextView t = new TextView(this);
-        AlertDialog.Builder builder = new AlertDialog.Builder( this );
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(this.getString(R.string.help));
         builder.setMessage(this.getString(R.string.helpplayers));
         builder.create().show();

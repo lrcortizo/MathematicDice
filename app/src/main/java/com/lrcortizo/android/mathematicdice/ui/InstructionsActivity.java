@@ -5,7 +5,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.lrcortizo.android.mathematic.dice.R;
+import com.lrcortizo.android.mathematicdice.R;
 
 public class InstructionsActivity extends AppCompatActivity {
 

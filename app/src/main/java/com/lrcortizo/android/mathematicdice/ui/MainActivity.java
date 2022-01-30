@@ -7,7 +7,7 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.lrcortizo.android.mathematic.dice.R;
+import com.lrcortizo.android.mathematicdice.R;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -16,23 +16,23 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.activity_main);
         //-------------------------------WIDGETS AND TEXT FIELDS---------------
-        final Button btGame = (Button) this.findViewById( R.id.btGame );
-        final Button btScore = (Button) this.findViewById( R.id.btScore );
-        final Button btExit = (Button) this.findViewById( R.id.btExit );
-        final Button btLanguage = (Button) this.findViewById( R.id.btLanguage );
-        final Button btInstructions = (Button) this.findViewById( R.id.btInstructions );
+        final Button btGame = (Button) this.findViewById(R.id.btGame);
+        final Button btScore = (Button) this.findViewById(R.id.btScore);
+        final Button btExit = (Button) this.findViewById(R.id.btExit);
+        final Button btLanguage = (Button) this.findViewById(R.id.btLanguage);
+        final Button btInstructions = (Button) this.findViewById(R.id.btInstructions);
 //-----------------------------------BUTTON LISTENERS---------------------------------------------
         btGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent (v.getContext(), PlayersActivity.class);
+                Intent intent = new Intent(v.getContext(), PlayersActivity.class);
                 startActivityForResult(intent, 0);
             }
         });
         btScore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent (v.getContext(), HistoryActivity.class);
+                Intent intent = new Intent(v.getContext(), HistoryActivity.class);
                 startActivityForResult(intent, 0);
             }
         });
@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         btLanguage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent (v.getContext(), LanguageActivity.class);
+                Intent intent = new Intent(v.getContext(), LanguageActivity.class);
                 startActivityForResult(intent, 0);
             }
         });
@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         btInstructions.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent (v.getContext(), InstructionsActivity.class);
+                Intent intent = new Intent(v.getContext(), InstructionsActivity.class);
                 startActivityForResult(intent, 0);
             }
         });

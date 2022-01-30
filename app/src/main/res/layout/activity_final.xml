@@ -24,7 +24,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/tvObjetivo"
+                android:id="@+id/tvTarget"
                 android:layout_weight="1" />
         </LinearLayout>
 
@@ -36,7 +36,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/tvResultado1"
+                android:id="@+id/tvResult1"
                 android:layout_weight="1" />
         </LinearLayout>
 
@@ -48,7 +48,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/tvResultado2"
+                android:id="@+id/tvResult2"
                 android:layout_weight="1" />
         </LinearLayout>
 
@@ -61,7 +61,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/tvGanador"
+                android:id="@+id/tvWinner"
                 android:layout_weight="1" />
         </LinearLayout>
 

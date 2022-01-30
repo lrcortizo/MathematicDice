@@ -12,7 +12,7 @@ public class SQLite extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 2;
 
     public SQLite(Context context) {
-        super( context, DATABASE_NAME, null, DATABASE_VERSION );
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
     @Override
@@ -28,19 +28,19 @@ public class SQLite extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        Log.w( SQLite.class.getName(),
+        Log.w(SQLite.class.getName(),
                 "Upgrading database from version "
                         + oldVersion
                         + " to " + newVersion
-                        + ", which will destroy all old data" );
+                        + ", which will destroy all old data");
         db.beginTransaction();
         try {
-            db.execSQL( "DROP TABLE IF EXISTS history" );
+            db.execSQL("DROP TABLE IF EXISTS history");
             db.setTransactionSuccessful();
         } finally {
             db.endTransaction();
         }
-        this.onCreate( db );
+        this.onCreate(db);
     }
 
 

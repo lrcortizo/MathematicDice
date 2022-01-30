@@ -8,13 +8,14 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.lrcortizo.android.mathematic.dice.R;
+import com.lrcortizo.android.mathematicdice.R;
 
 import java.util.Locale;
 
 public class LanguageActivity extends AppCompatActivity {
     private Locale locale;
-    private Configuration config = new Configuration();
+    private final Configuration config = new Configuration();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

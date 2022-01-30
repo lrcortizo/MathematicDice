@@ -1,37 +1,30 @@
 package com.lrcortizo.android.mathematicdice.core;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.IntStream;
 
+import lombok.Value;
+import lombok.experimental.NonFinal;
+
+@Value
 public class Dice implements Serializable {
-    private int numCaras;
-    private String [] tirada;
 
-    public Dice(int n){
-        numCaras=n;
-        tirada = new String[n];
+    int sideNumber;
+
+    @NonFinal
+    List<String> diceThrows;
+
+    public Dice(final int sideNumber) {
+        this.sideNumber = sideNumber;
+        this.diceThrows = new ArrayList<>();
     }
 
-    public void lanzarDado(){
-        if(numCaras==6){
-            for(int i=0;i<6;i++) {
-                int resultado = 0;
-                resultado = (int) (Math.random() * numCaras + 1);
-                StringBuilder sb = new StringBuilder();
-                sb.append(resultado);
-                tirada[i]=sb.toString();
-            }
-        }else {
-            for (int i = 0; i < 2; i++) {
-                int resultado = 0;
-                resultado = (int) (Math.random() * numCaras + 1);
-                StringBuilder sb = new StringBuilder();
-                sb.append(resultado);
-                tirada[i] = sb.toString();
-            }
-        }
-    }
-
-    public String[] getTirada() {
-        return tirada;
+    public void throwDice() {
+        IntStream.range(0, sideNumber).forEach(i -> {
+            int result = (int) (Math.random() * this.sideNumber + 1);
+            this.diceThrows.add(String.valueOf(result));
+        });
     }
 }

@@ -2,98 +2,102 @@ package com.lrcortizo.android.mathematicdice.core;
 
 import java.io.Serializable;
 
+import lombok.Data;
+
+@Data
 public class Game implements Serializable {
-    private Dice dice6;
-    private int objetivo;
-    private String jugador1;
-    private String jugador2;
-    private String resultado1;
-    private String resultado2;
 
-    public Game(String j1, String j2){
-        jugador1 = j1;
-        jugador2 = j2;
+    final String player1;
+    final String player2;
+    Dice dice;
+    int target;
+    String result1;
+    String result2;
+
+    public Game(final String player1, final String player2) {
+        this.player1 = player1;
+        this.player2 = player2;
     }
 
-    public void setDados(Dice d, int ob){
-        dice6 = d;
-        objetivo = ob;
+    public void setDices(final Dice d, final int target) {
+        this.dice = d;
+        this.target = target;
     }
 
-    public void setResultado1(String r){
-        resultado1 = r;
-    }
-
-    public void setResultado2(String r){
-        resultado2 = r;
-    }
-
-    public String ganador(){
+    public String winner() {
         String toRet = "";
-        double r1 = Double.parseDouble(resultado1);
-        double r2 = Double.parseDouble(resultado2);
-        if(resultado1==null && resultado2==null){
-            toRet = "Empate";
-        }else if(resultado1==null){
-            toRet = jugador2;
-        }else if(resultado2==null){
-            toRet = jugador1;
-        }else if(r1==r2){
-            toRet = "Empate";
-        } else if(r1<objetivo && r2<objetivo){
-            if(r1>r2){
-                toRet = jugador1;
-            } else{
-                toRet = jugador2;
+        double r1 = Double.parseDouble(result1);
+        double r2 = Double.parseDouble(result2);
+        if (result1 == null && result2 == null) {
+            toRet = "Draw";
+        } else if (result1 == null) {
+            toRet = player2;
+        } else if (result2 == null) {
+            toRet = player1;
+        } else if (r1 == r2) {
+            toRet = "Draw";
+        } else if (r1 < target && r2 < target) {
+            if (r1 > r2) {
+                toRet = player1;
+            } else {
+                toRet = player2;
             }
-        } else if(r1>objetivo && r2>objetivo){
-            if(r1<r2){
-                toRet = jugador1;
-            } else{
-                toRet = jugador2;
+        } else if (r1 > target && r2 > target) {
+            if (r1 < r2) {
+                toRet = player1;
+            } else {
+                toRet = player2;
             }
-        } else if(r1>objetivo && r2<objetivo){
-            if((r1-objetivo)==(objetivo-r2)){
-                toRet = "Empate";
-            } else if((r1-objetivo)<(objetivo-r2)){
-                toRet = jugador1;
-            } else if((r1-objetivo)>(objetivo-r2)){
-                toRet = jugador2;
+        } else if (r1 > target && r2 < target) {
+            if ((r1 - target) == (target - r2)) {
+                toRet = "Draw";
+            } else if ((r1 - target) < (target - r2)) {
+                toRet = player1;
+            } else if ((r1 - target) > (target - r2)) {
+                toRet = player2;
             }
-        } else if(r1<objetivo && r2>objetivo){
-            if((r2-objetivo)==(objetivo-r1)){
-                toRet = "Empate";
-            } else if((r2-objetivo)<(objetivo-r1)){
-                toRet = jugador2;
-            } else if((r2-objetivo)>(objetivo-r1)){
-                toRet = jugador1;
+        } else if (r1 < target && r2 > target) {
+            if ((r2 - target) == (target - r1)) {
+                toRet = "Draw";
+            } else if ((r2 - target) < (target - r1)) {
+                toRet = player2;
+            } else if ((r2 - target) > (target - r1)) {
+                toRet = player1;
             }
         }
         return toRet;
     }
 
-    public String getResultado1() {
-        return resultado1;
+    public String getResult1() {
+        return result1;
     }
 
-    public String getResultado2() {
-        return resultado2;
+    public void setResult1(String r) {
+        result1 = r;
     }
 
-    public Dice getDado6() {
-        return dice6;
+    public String getResult2() {
+        return result2;
     }
 
-    public int getObjetivo() {
-        return objetivo;
+    public void setResult2(String r) {
+        result2 = r;
     }
 
-    public String getJugador1() {
-        return jugador1;
+    public Dice getDice() {
+        return dice;
     }
 
-    public String getJugador2() {
-        return jugador2;
+    public int getTarget() {
+        return target;
+    }
+
+    public String getPlayer1() {
+        return player1;
+    }
+
+    public String getPlayer2() {
+        return player2;
     }
 
 

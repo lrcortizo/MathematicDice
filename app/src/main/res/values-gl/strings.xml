@@ -20,12 +20,12 @@
     <string name="opHelp">Axuda</string>
     <string name="opSalir">Saír</string>
     <string name="tvExpresion">Escribe o resultado:</string>
-    <string name="tvHistory">Historial de partidas:</string>
+    <string name="tvHistory">Historial de games:</string>
     <string name="tvJugador1">Nome do xogador 1:</string>
     <string name="tvJugador2">Nome do xogador 2:</string>
     <string name="y">e</string>
     <string name="tiempo">Quedan:</string>
-    <string name="resultado">Resultado de</string>
+    <string name="result">Resultado de</string>
     <string name="dice12">Reultado del lanzamento dos dados de 12 caras:</string>
     <string name="dice6">Reultado del lanzamento dos dados de 6 caras:</string>
     <string name="empate">Empate entre</string>

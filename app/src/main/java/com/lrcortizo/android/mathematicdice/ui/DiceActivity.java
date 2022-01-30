@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -14,99 +13,98 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.lang.*;
 
-import com.lrcortizo.android.mathematic.dice.R;
+import com.lrcortizo.android.mathematicdice.R;
 import com.lrcortizo.android.mathematicdice.core.Dice;
 import com.lrcortizo.android.mathematicdice.core.Game;
 
 public class DiceActivity extends AppCompatActivity {
+
     private boolean label6 = false;
+
     private boolean label12 = false;
 
-    protected void onCreate(Bundle savedInstanceState) {
+    @Override
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dice);
+
         //-------------------------------WIDGETS AND TEXT FIELDS------------------
-        final Game game = (Game)getIntent().getExtras().getSerializable("partida");
-        final Button btPlay =(Button) this.findViewById(R.id.btPlay);
-        final Button bt6 = (Button) this.findViewById( R.id.button6 );
-        final Button bt12 = (Button) this.findViewById( R.id.button12 );
-        final TextView tvDados6 = (TextView) this.findViewById(R.id.tvDados6);
-        final TextView tvDados12 = (TextView) this.findViewById(R.id.tvDados12);
+        final Game game = (Game) getIntent().getExtras().getSerializable("game");
+        final Button btPlay = (Button) this.findViewById(R.id.btPlay);
+        final Button bt6 = (Button) this.findViewById(R.id.button6);
+        final Button bt12 = (Button) this.findViewById(R.id.button12);
+        final TextView tvDices6 = (TextView) this.findViewById(R.id.tvDices6);
+        final TextView tvDices12 = (TextView) this.findViewById(R.id.tvDices12);
         final TextView tvDice = (TextView) this.findViewById(R.id.tvDice);
-        //------------------------------LANZAR DADOS--------------------------
+
+        //------------------------------THROW DICES--------------------------
         final Dice dice6 = new Dice(6);
         final Dice dice12 = new Dice(12);
-        dice6.lanzarDado();
-        dice12.lanzarDado();
-        //------------------------------------------BUTTON LISTENERS-----------------------------
-        bt6.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                tvDados6.setText(DiceActivity.this.getString(R.string.dice6)+" "+ dice6.getTirada()[0]+", "+ dice6.getTirada()[1]+", "
-                        + dice6.getTirada()[2]+", "+ dice6.getTirada()[3]+", "+ dice6.getTirada()[4]+", "+ dice6.getTirada()[5]);
-                label6=true;
-            }
-        });
-        bt12.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                tvDados12.setText(DiceActivity.this.getString(R.string.dice12)+" "+ dice12.getTirada()[0]+", "+ dice12.getTirada()[1]);
-                tvDice.setText(DiceActivity.this.getString(R.string.objetivo)+" "+(Integer.parseInt(dice12.getTirada()[0])*Integer.parseInt(dice12.getTirada()[1])));
-                label12=true;
-            }
-        });
-        btPlay.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //-----------COMPROBACION DADOS LANZADOS---------------
-                if(label6 && label12) {
-                    game.setDados(dice6, Integer.parseInt(dice12.getTirada()[0])*Integer.parseInt(dice12.getTirada()[1]));
-                    Intent intent = new Intent(v.getContext(), Turn1Activity.class);
-                    intent.putExtra("partida", game);
-                    startActivityForResult(intent, 0);
-                    finish();
-                }else{
-                    AlertDialog.Builder builder = new AlertDialog.Builder( DiceActivity.this );
-                    builder.setTitle( DiceActivity.this.getString(R.string.error) );
-                    builder.setMessage( DiceActivity.this.getString(R.string.errordice) );
-                    builder.create().show();
+        dice6.throwDice();
+        dice12.throwDice();
 
-                }
+        //------------------------------------------BUTTON LISTENERS-----------------------------
+        bt6.setOnClickListener(v -> {
+            tvDices6.setText(String.format("%s %s, %s, %s, %s, %s, %s",
+                    DiceActivity.this.getString(R.string.dice6), dice6.getDiceThrows().get(0),
+                    dice6.getDiceThrows().get(1), dice6.getDiceThrows().get(2),
+                    dice6.getDiceThrows().get(3), dice6.getDiceThrows().get(4),
+                    dice6.getDiceThrows().get(5)));
+            label6 = true;
+        });
+        bt12.setOnClickListener(v -> {
+            tvDices12.setText(String.format("%s %s, %s",
+                    DiceActivity.this.getString(R.string.dice12), dice12.getDiceThrows().get(0),
+                    dice12.getDiceThrows().get(1)));
+            tvDice.setText(String.format("%s %d", DiceActivity.this.getString(R.string.objetivo),
+                    Integer.parseInt(dice12.getDiceThrows().get(0)) * Integer.parseInt(dice12.getDiceThrows().get(1))));
+            label12 = true;
+        });
+        btPlay.setOnClickListener(v -> {
+            //-----------CHECK DICES THROWN---------------
+            if (label6 && label12) {
+                game.setDices(dice6, Integer.parseInt(dice12.getDiceThrows().get(0)) * Integer.parseInt(dice12.getDiceThrows().get(1)));
+                Intent intent = new Intent(v.getContext(), Turn1Activity.class);
+                intent.putExtra("game", game);
+                startActivityForResult(intent, 0);
+                finish();
+            } else {
+                AlertDialog.Builder builder = new AlertDialog.Builder(DiceActivity.this);
+                builder.setTitle(DiceActivity.this.getString(R.string.error));
+                builder.setMessage(DiceActivity.this.getString(R.string.errordice));
+                builder.create().show();
+
             }
         });
     }
+
     //---------------------------OPTIONS MENU--------------------------------
     @Override
-    public boolean onCreateOptionsMenu(Menu menu){
+    public boolean onCreateOptionsMenu(final Menu menu) {
         super.onCreateOptionsMenu(menu);
         this.getMenuInflater().inflate(R.menu.game_menu, menu);
         return true;
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem menuItem){
-        boolean toret = false;
-        switch (menuItem.getItemId()){
+    public boolean onOptionsItemSelected(final MenuItem menuItem) {
+        switch (menuItem.getItemId()) {
             case R.id.opHelp:
                 help();
-                toret = true;
-                break;
+                return true;
             case R.id.opSalir:
                 Intent Activity = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(Activity);
                 finish();
-                toret = true;
-                break;
+                return true;
         }
-        return toret;
+        return false;
     }
 
-    public void help(){
-        final TextView t = new TextView(this);
-        AlertDialog.Builder builder = new AlertDialog.Builder( this );
+    public void help() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(this.getString(R.string.help));
         builder.setMessage(this.getString(R.string.helpdados));
         builder.create().show();
-
     }
 }

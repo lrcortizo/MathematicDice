@@ -17,7 +17,7 @@
     <string name="btTurno">Pasar turno</string>
     <string name="btTerminar">Terminar</string>
     <string name="btFin">Fin</string>
-    <string name="tvHistory">Historial de partidas:</string>
+    <string name="tvHistory">Historial de games:</string>
     <string name="btLanguage">Idioma</string>
     <string name="btSpanish">Español</string>
     <string name="btEnglish">Inglés</string>
@@ -39,7 +39,7 @@
     <string name="errorturno2">Formato incorrecto, introduce una operación</string>
     <string name="errorturno3">Formato incorrecto, caracteres no válidos</string>
     <string name="tiempo">Faltan:</string>
-    <string name="resultado">Resultado de</string>
+    <string name="result">Resultado de</string>
     <string name="empate">Empate entre</string>
     <string name="y">y</string>
     <string name="ganar">gana a</string>
